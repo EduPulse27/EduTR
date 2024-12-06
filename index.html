@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduTR</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <!-- Standard favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+  <!-- PNG favicons -->
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+
+  <!-- Manifest file (for PWAs) -->
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Browser configuration file (optional, for Microsoft browsers) -->
+  <meta name="msapplication-config" content="/browserconfig.xml">
+
+
+
+  <!-- box icons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <!-- swiper css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <!-- lucide icons -->
+  <script src="https://unpkg.com/lucide@0.24.0/dist/lucide.js"></script>
+
+  <!-- Tailwind css -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          screens: {
+            'custom-range': { min: '300px', max: '700px' },
+          },
+          colors: {
+            "thirty-pr-color": "#3b82f6",
+            "ten-pr-color": "#f59e0b",
+          },
+          fontFamily: {
+            poppins: ["Poppins", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- custom css -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- javascript -->
+  <script src="script.js"></script>
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+  <!-- Theme toggle functionality -->
+  <script>
+    // Set light theme as default if no preference is stored
+    if (!localStorage.getItem("color-theme")) {
+      localStorage.setItem("color-theme", "light");
+    }
+
+    // Apply theme based on localStorage
+    if (localStorage.getItem("color-theme") === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  </script>
+
+  <!-- Theme toggle script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const themeToggleBtn = document.getElementById("theme-toggle");
+      const themeToggleDarkIcon =
+        document.getElementById("theme-toggle-dark");
+      const themeToggleLightIcon =
+        document.getElementById("theme-toggle-light");
+      const themeToggleText = document.getElementById("theme-toggle-text");
+
+      // Set initial state
+      function updateTheme() {
+        const isDark = localStorage.getItem("color-theme") === "dark";
+        document.documentElement.classList.toggle("dark", isDark);
+        themeToggleLightIcon.classList.toggle("hidden", !isDark);
+        themeToggleDarkIcon.classList.toggle("hidden", isDark);
+        themeToggleText.textContent = isDark ? "Light Mode" : "Dark Mode";
+      }
+
+      // Initialize theme
+      updateTheme();
+
+      // Add click event listener
+      themeToggleBtn.addEventListener("click", () => {
+        const isDark = localStorage.getItem("color-theme") === "dark";
+        localStorage.setItem("color-theme", isDark ? "light" : "dark");
+        updateTheme();
+      });
+    });
+  </script>
+
+  <style>
+    :root {
+      background-color: #f9fafb;
+    }
+
+    :root.dark {
+      background-color: #111827;
+    }
+  </style>
+</head>
+
+<div class="banter-loader" id="banter-loader">
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+  <div class="banter-loader__box"></div>
+</div>
+
+<script>
+  var loader = document.getElementById("banter-loader");
+  window.addEventListener("load", function () {
+    loader.style.display = "none";
+
+  })
+</script>
+
+<body class="bg-purple-50 dark:bg-gray-900 min-h-[500px] transition-colors duration-200">
+  <!-- header design -->
+  <header class="visible sticky top-0 z-50 bg-white dark:bg-gray-800 transition-colors duration-200" id="home-header">
+    <nav class="flex justify-between items-center lg:p-5 md:p-4 sm:p-5 custom-range:p-5 dark:text-gray-100 ">
+
+      <!-- EduTR Logo on the left corner -->
+      <div class="relative flex items-center">
+        <h4 id="header-logo" class="relative text-purple-700 dark:text-purple-400 text-2xl font-bold tracking-wider">
+          EduTR
+        </h4>
+      </div>
+
+      <!-- Centered Desktop Menu -->
+      <ul class="nav-list hidden md:flex absolute left-1/2 transform -translate-x-1/2 space-x-8 font-bold">
+        <li>
+          <a href="#home"
+            class="text-gray-800 dark:text-gray-200 hover:text-purple-700 dark:hover:text-purple-400">Home</a>
+        </li>
+        <li>
+          <a href="#subject"
+            class="text-gray-800 dark:text-gray-200 hover:text-purple-700 dark:hover:text-purple-400">Subject</a>
+        </li>
+        <li>
+          <a href="#wcu-heading"
+            class="text-gray-800 dark:text-gray-200 hover:text-purple-700 dark:hover:text-purple-400">Why EduTR</a>
+        </li>
+        <li>
+          <a href="#about"
+            class="text-gray-800 dark:text-gray-200 hover:text-purple-700 dark:hover:text-purple-400">About Us</a>
+        </li>
+        <li>
+          <a href="#contact"
+            class="text-gray-800 dark:text-gray-200 hover:text-purple-700 dark:hover:text-purple-400">Contact Us</a>
+        </li>
+      </ul>
+
+      <!-- Right-aligned Button for Mobile & Desktop -->
+      <div class="flex items-center space-x-4">
+        <!-- New Theme Toggle Button -->
+        <button id="theme-toggle"
+          class="flex items-center gap-2 px-3 py-2 rounded-md font-medium transition-all duration-200 ease-in-out bg-purple-100 text-purple-700 hover:bg-purple-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
+          <!-- Sun icon for light mode -->
+          <svg id="theme-toggle-light" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+          </svg>
+          <!-- Moon icon for dark mode -->
+          <svg id="theme-toggle-dark" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+          </svg>
+          <span id="theme-toggle-text">Dark Mode</span>
+        </button>
+
+        <!-- My Notes Button -->
+        <button onclick="navigateToSubjects()"
+          class="bg-purple-600 dark:bg-purple-700 text-white px-3 py-2 rounded-md hover:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+          id="nav-btn">
+          All Notes
+        </button>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          class="text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-400 sm:hidden menu-button"
+          aria-label="Toggle mobile menu" id="menu-toggle" onclick="toggleMenu()">
+          <!-- Menu Icon -->
+          <svg id="menu-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <!-- Close Icon -->
+          <svg id="menu-close" xmlns="http://www.w3.org/2000/svg" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu"
+      class="fixed inset-0 transform translate-x-full transition-transform duration-300 ease-in-out z-50">
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black opacity-50"></div>
+
+      <!-- Drawer -->
+      <div
+        class="absolute right-0 top-0 h-full w-64 bg-white dark:bg-gray-800 shadow-lg transform transition-transform duration-300 ease-in-out">
+        <!-- Menu Header -->
+        <div class="flex justify-between items-center p-4 border-b dark:border-gray-700">
+          <h3 class="text-lg font-bold text-purple-700 dark:text-purple-400">
+            Menu
+          </h3>
+          <button onclick="toggleMenu()"
+            class="p-2 text-gray-600 hover:text-purple-700 dark:text-gray-300 dark:hover:text-purple-400 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Menu Items -->
+        <nav class="flex flex-col p-4">
+          <a href="#home" onclick="toggleMenu()"
+            class="py-3 px-4 text-gray-800 dark:text-gray-200 hover:bg-purple-50 dark:hover:bg-gray-700 rounded-md">Home</a>
+          <a href="#subject" onclick="toggleMenu()"
+            class="py-3 px-4 text-gray-800 dark:text-gray-200 hover:bg-purple-50 dark:hover:bg-gray-700 rounded-md">Subject</a>
+          <a href="#wcu-heading" onclick="toggleMenu()"
+            class="py-3 px-4 text-gray-800 dark:text-gray-200 hover:bg-purple-50 dark:hover:bg-gray-700 rounded-md">Why
+            EduTR</a>
+          <a href="#about" onclick="toggleMenu()"
+            class="py-3 px-4 text-gray-800 dark:text-gray-200 hover:bg-purple-50 dark:hover:bg-gray-700 rounded-md">About
+            Us</a>
+          <a href="#contact" onclick="toggleMenu()"
+            class="py-3 px-4 text-gray-800 dark:text-gray-200 hover:bg-purple-50 dark:hover:bg-gray-700 rounded-md">Contact
+            Us</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("mobile-menu");
+      const isOpen = !menu.classList.contains("translate-x-full");
+
+      if (isOpen) {
+        // Close menu
+        menu.classList.add("translate-x-full");
+        document.body.style.overflow = "";
+      } else {
+        // Open menu
+        menu.classList.remove("translate-x-full");
+        document.body.style.overflow = "hidden";
+      }
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener("click", function (event) {
+      const menu = document.getElementById("mobile-menu");
+      const menuButton = document.getElementById("menu-toggle");
+
+      if (
+        !menu.contains(event.target) &&
+        !menuButton.contains(event.target) &&
+        !menu.classList.contains("translate-x-full")
+      ) {
+        toggleMenu();
+      }
+    });
+  </script>
+
+  <!-- Home Section -->
+  <section id="home" class="min-h-[60vh] flex items-center">
+    <!-- Added min-height and flex -->
+    <div
+      class="container mx-auto px-4 py-8 sm:py-12 md:py-24 flex flex-col md:flex-row-reverse items-center justify-between">
+      <div class="md:w-1/2 flex flex-col items-center md:items-center space-y-4 sm:space-y-6 text-center">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-700 dark:text-white" data-aos="zoom-in-up">
+          Ace Your Exams
+        </h2>
+        <h3 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-700 dark:text-white" data-aos="zoom-in-up">
+          Build your
+          <span class="text-purple-700 dark:text-purple-400">future</span>
+        </h3>
+
+        <!-- Search Bar -->
+        <div class="relative w-[280px] sm:w-[300px] mt-4" data-aos="zoom-in-up">
+          <svg id="search"
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 sm:w-5 h-4 sm:h-5"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" placeholder="search anything"
+            class="w-full pl-10 pr-4 py-2 sm:py-3 text-sm sm:text-base rounded-full border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-gray-700 dark:text-gray-200 dark:placeholder-gray-400 transition-colors duration-200"
+            id="searchInput" oninput="showSuggestions()" autocomplete="off" />
+        </div>
+        <div id="suggestions" class="suggestions"></div>
+      </div>
+
+      <!-- Right image (will be on left in desktop) -->
+      <div class="md:w-1/2 mt-3 md:mt-0 flex justify-center" data-aos="zoom-in-up">
+        <img src="https://drive.google.com/thumbnail?id=1WSW_UKk8vdzQi7S-Gz_EH0JRH_IfpvZz&sz=w1026-h1026"
+          alt="Student studying" class="w-[80%] sm:w-[70%] h-auto object-contain" />
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // search functionality
+
+    const subjects = [
+      "Mathematics", "Physics", "Chemistry", "Design and Analysis of Algorithm", "English", "Object Oriented Programming", "Operating System", "Database Management System", "Discrete Mathematics", "Electrical and Electronics Measurements", "Electronic Device and Circuits", "Internet of Thing", "Digital Electronics and Circuit", "Signal And Systems", "Communication Theory", "Electromagnetic Field Theory", "Analog Communication", "Data Analysis using Python", "Network Analysis", "Electrical Machines - 1", "Electrical Machines - 2", "Control System 1", "Analog and Digital Electronics", "Electrical Circuit Analysis", "Soft Computing",
+      "Electrical Measurements and Instrumentation",
+      "Biochemistry",
+      "Biostatistics",
+      "Cell and Molecular Biology",
+      "Object Oriented Design and Programming using C++",
+      "Introduction to AI and ML",
+      "Geotechnical Engineering - I",
+      "Structural Analysis - 1",
+      "Structural Design - 1",
+      "Transportation Engineering - 1",
+      "Fluid Mechanics",
+      "Solid Mechanics",
+      "Surveying and Geometrics",
+      "Bioanalytical Tools and Techniques",
+      "Bioenergetics and Thermodynamics",
+      "Genetics and Genetic Engineering",
+      "Microbiology",
+      "Fundamentals of Cloud Computing Technology",
+      "Artificial Intelligence",
+      "Computer Network",
+      "Introduction to Robotics and AI",
+      "Mathematics 3",
+      "Organisational Behaviour",
+      "Planning Theory - II",
+      "Cities in History",
+      "Traffic and Transport Planning",
+      "Site and Land Development",
+      "Demography",
+      "Planning Practice",
+      "Ecology and Resources Planning",
+      "Housing",
+      "Reading and Comprehending Spaces",
+      "Public Policy and Politics in Planning",
+      "Advanced Spatial Data Infrastructure for Planning",
+      "Engineering Economics"
+    ];
+
+    const links = [
+      "https://drive.google.com/file/d/1pRqg97LfbLeUVBa_6tPKUJD0dhFxj2ol/view?usp=drive_link",
+      "https://drive.google.com/file/d/1IsjgQikZfu-EFIHYdYYFTTHyeidhsR3W/view?usp=drive_link",
+      "- https://drive.google.com/file/d/1OvQcQGPwY-_o2UPZ8uZJKuok4IGnzKDS/view?usp=drive_link",
+      "https://drive.google.com/drive/folders/1kmXHyfLBQWgJYlUTZqnlZ9vCGxpRGJCY?usp=drive_link",
+      "https://drive.google.com/drive/folders/1qz8VAPxZprWJiOQdR1PDtnenudT_K5Bo?usp=drive_link",
+      "https://drive.google.com/file/d/1Agd0F19rArk3SvYI7msTQCaPIiyTVCE6/view?usp=drive_link",
+      "https://drive.google.com/file/d/1J_R34RaognDiBBna2mlXKYpTztt6BYJk/view?usp=drive_link",
+      "https://drive.google.com/drive/folders/1y3UpjST4Pl4vybSjyL5PlxmHabeSFtoH?usp=drive_link",
+      "https://drive.google.com/drive/folders/1E8yqkEl0wvhIXSuTZ9R3jEr_XBlFN3kU?usp=drive_link ",
+      "https://drive.google.com/drive/folders/1VA9MnlkkX_nM2N_wOt2WJsYCB0tWdM69?usp=drive_link",
+      "https://drive.google.com/drive/folders/1gB8uEefOgMDPub7_-BaiFpo_nqmrFbiq?usp=drive_link",
+      "https://drive.google.com/drive/folders/1DFAmsZFIdG0RYuX8CNK3KonYO26GoSNB?usp=drive_link",
+      "https://drive.google.com/drive/folders/1Uva7SBfD-5kTKjU5WvGJTOxRruDpG49i?usp=drive_link",
+      "https://drive.google.com/drive/folders/1BPorlnSxNmmhv094p6SXZpzYzUg86tmk?usp=drive_link",
+      "https://drive.google.com/drive/folders/1EPzAwDJTNP2XzgXxEpM_K8-dRnnRFn9u?usp=sharing",
+      "https://drive.google.com/drive/folders/1G8OI9Mk3GH9bXOfsTExODZj3dDp9pOWv?usp=drive_link",
+      "https://drive.google.com/drive/folders/1Ml_ydYSFVTzx0weB_GbIe1vsBh5pkFzc?usp=drive_link",
+      "https://drive.google.com/drive/folders/1u6PrpFG7o27huK1Xmrs4JTMO-UAL6kQ3?usp=drive_link",
+      "https://drive.google.com/drive/folders/19G_Fgr8dxEUi6P__SZzEn7j3Vubrm5rG?usp=drive_link",
+      "https://drive.google.com/drive/folders/1tqP57bCa3v61c_f-px7QXTBLPrQsmdtb?usp=drive_link",
+      "https://drive.google.com/drive/folders/1rp0_Yb2YJ-uXmMf4_DyeXI0DD3L4X8qw?usp=drive_link",
+      "https://drive.google.com/drive/folders/1-vPye9y2l0R89T_VpCv2pdXZ2EkeDtcT?usp=drive_link",
+      "https://drive.google.com/drive/folders/1q46zbJfZ3kr7brl34QxdPxv38MgdfwgY?usp=drive_link",
+      "https://drive.google.com/drive/folders/1iJrmnM_Bq18mokBo5QmfGB5VqwBhXGEx?usp=drive_link",
+      "https://drive.google.com/drive/folders/1RTeLcGXtP1HWV4L5FrpQRYvJ0wieopzl?usp=drive_link",
+      "https://drive.google.com/drive/folders/1fyTzFJnU_JTKdRmD-lupipSXItLiiy3j?usp=drive_link",
+      "https://drive.google.com/drive/folders/1zAplIdpMlMqFHQzlFix-ZAwzdB2yGdg9?usp=drive_link",
+      "https://drive.google.com/drive/folders/18pBo_fZd6OAIYbQBqLP6AFfoxgKUTQiV?usp=drive_link",
+      "https://drive.google.com/drive/folders/1FS8F6KoozjeU_G7hliF2D96WLLvsyhqE?usp=drive_link",
+      "https://drive.google.com/drive/folders/13tQr0UMZ0vVS9LtaaHO1ddlOTrscI3nK?usp=drive_link",
+      "https://drive.google.com/drive/folders/1iDvpspi24o3PkIgtdIbUrG7Ztw0m6bUf?usp=drive_link",
+      "https://drive.google.com/drive/folders/1jTRDwexjFXF2qOpqXhcy39f8IXuGaDbK?usp=drive_link",
+      "https://drive.google.com/drive/folders/1VcGjPmrzsJDy1O27lfbZLCL7qo3jGgri?usp=drive_link",
+      "https://drive.google.com/drive/folders/1Kf3m8R4pZ3_3DBEs5J_foCEWcBN3-rIe?usp=drive_link",
+      "https://drive.google.com/drive/folders/1L1QnLqNXpLL6T9zNYNnnpJGSIb7vCYER?usp=drive_link",
+      "https://drive.google.com/drive/folders/1thqSVsJ2WmF8ye8rCjCDGRs3-VBhVeo4?usp=drive_link",
+      "https://drive.google.com/drive/folders/1-1F4BJlOdP9Y18gigw4f6Pfx-3iOxa_Z?usp=drive_link",
+      "https://drive.google.com/drive/folders/1VxFvzGpEGuEgEYYG6Wbfg7SL9v59lOcC?usp=drive_link",
+      "https://drive.google.com/drive/folders/1KtG4G070iDMWVOchD8tNPlLus4keo6eA?usp=drive_link",
+      "https://drive.google.com/drive/folders/1SnZYvNOc8C-Tqje2EellNvYFgkmoz1bV?usp=drive_link",
+      "https://drive.google.com/drive/folders/19H2Qik69rBYQTVlm4KowPSHI4FV8aeaz?usp=drive_link",
+      "https://drive.google.com/drive/folders/1QY3To7cXs54swcEVCJAM1EKjvik-xRdX?usp=drive_link",
+      "https://drive.google.com/drive/folders/1LNkUXfSqskRQLpR6mx-A-S2TbNxOC4T1?usp=drive_link",
+      "https://drive.google.com/drive/folders/1JTc0yeb3-7jl8ZhlUBdTsxG87LTjEedp?usp=drive_link",
+      "https://drive.google.com/drive/folders/1msCp-jCR5F0GozjoQma6zFkJkXhKCMU8?usp=drive_link",
+      "https://drive.google.com/drive/folders/1l-62d8Dk0rpzix-zIVRkzuQZbM7RAeNz?usp=drive_link",
+      "https://drive.google.com/drive/folders/1doJxXuRidaZz7QsTwjnzSiklyauHvGhi?usp=drive_link",
+      "https://drive.google.com/drive/folders/1QkL4Z8JafIf0-bPM4IlW2kLvPcn2cG7_?usp=drive_link",
+      "https://drive.google.com/drive/folders/1NZeMwlxtIa0zpJNMxW1WSJ5D03zarYxX?usp=drive_link",
+      "https://drive.google.com/drive/folders/1U3BC-wU_kkexu99aqZNNlLE-V8P1xVe0?usp=drive_link",
+      "https://drive.google.com/drive/folders/1lqhOZ7zaTdWVqFyYXPezqm2mjuC2QObL?usp=drive_link",
+      "https://drive.google.com/drive/folders/1Sw571HZxOyRAAmvHutwBNOwkcLRTY-rC?usp=drive_link",
+      "https://drive.google.com/drive/folders/1KYFUW_3aQyfqAM9aBS7VPW4caqmE5Nhk?usp=drive_link",
+      "https://drive.google.com/drive/folders/149shY6iiGm7rSw6u--4MZQi5cZBbnBFu?usp=drive_link",
+      "https://drive.google.com/drive/folders/1kj-sLOb0gf7xQ_JqoQiVt1HUPIvN1rsc?usp=drive_link",
+      "https://drive.google.com/drive/folders/1wL_hAH8lFG0uU7EQFBx8nlqgwInpqz66?usp=drive_link",
+      "https://drive.google.com/drive/folders/1JYNtw9BBywAJnfV8V9-MnubWB5uKZ0f2?usp=drive_link",
+      "https://drive.google.com/drive/folders/1PsvlSk5XPJYu5IYYlv5GzFz5fpOsAqcn?usp=drive_link",
+      "https://drive.google.com/drive/folders/1RKfBg9O3fM-2tY0YVXpkx1qOVBqHX0da?usp=drive_link",
+      "https://drive.google.com/drive/folders/1oJuc6hLCBnGtgCtTm8vjZ1zI4Gp8v31r?usp=drive_link"
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    const suggestionsDiv = document.getElementById("suggestions");
+
+    // Show suggestions based on user input
+    function showSuggestions() {
+      const input = searchInput.value.toLowerCase();
+      suggestionsDiv.innerHTML = "";
+
+      if (input) {
+        // Filter subjects based on input
+        const filteredSubjects = subjects.filter((subject) =>
+          subject.toLowerCase().includes(input)
+        );
+
+        // Display filtered subjects as suggestions
+        filteredSubjects.forEach((subject, index) => {
+          const suggestionItem = document.createElement("div");
+          suggestionItem.classList.add("suggestion-item");
+          suggestionItem.textContent = subject;
+
+          suggestionItem.addEventListener("click", () => {
+            const subjectIndex = subjects.indexOf(subject);
+            if (subjectIndex !== -1) {
+              window.open(links[subjectIndex], "_blank");
+            }
+            searchInput.value = subject;
+            suggestionsDiv.innerHTML = "";
+          });
+
+          suggestionsDiv.appendChild(suggestionItem);
+        });
+      }
+    }
+
+    // Hide suggestions if clicked outside
+    document.addEventListener("click", (event) => {
+      if (
+        !suggestionsDiv.contains(event.target) &&
+        event.target !== searchInput
+      ) {
+        suggestionsDiv.innerHTML = "";
+      }
+    });
+  </script>
+
+  <!-- Courses Section -->
+  <section class="feature mt-1" id="subject">
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold text-center mb-8 dark:text-white" data-aos="zoom-in-up">
+        Popular
+        <span class="text-purple-700 dark:text-purple-400">Subjects</span>
+      </h1>
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 subject-cards">
+        <!-- Subject Card 1 -->
+        <div
+          class="flex flex-col justify-between border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200"
+          data-aos="fade-up">
+          <div class="p-4">
+            <img src="https://drive.google.com/thumbnail?id=1feU2yMs5KxrH28ToGs50_gildK8paqlU&sz=w1026-h1026"
+              alt="Real Time System" class="w-full h-48 object-cover mb-4" />
+            <p class="text-md font-bold text-gray-500 dark:text-gray-400 text-center">
+              CSE
+            </p>
+            <h2 class="text-lg uppercase font-semibold text-center mt-2 dark:text-white">
+              Real Time System
+            </h2>
+          </div>
+          <button class="btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+            onclick="window.open('https://drive.google.com/file/d/1QV3aOigcxkcGwbyNCWcQlvFRWWrFffct/view?usp=drive_link', '_blank')">
+            EXPLORE
+          </button>
+        </div>
+
+        <!-- Subject Card 2 -->
+        <div
+          class="flex flex-col justify-between border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200"
+          data-aos="fade-up">
+          <div class="p-4">
+            <img src="https://drive.google.com/thumbnail?id=1k_MLH2RGtHsg-uBv76JKltN5UVZ4uTlm&sz=w1026-h1026"
+              alt="Design and Analysis of Algorithm" class="w-full h-48 object-cover mb-4" />
+            <p class="text-md font-bold text-gray-500 dark:text-gray-400 text-center">
+              IT
+            </p>
+            <h2 class="text-lg uppercase font-semibold text-center mt-2 dark:text-white">
+              Design and Analysis of Algorithm
+            </h2>
+          </div>
+          <button class="btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+            onclick="window.open('https://drive.google.com/file/d/1TDM-vMUA7dCkBLxZ6D7YBvrleY4qVs-6/view?usp=sharing', '_blank')">
+            EXPLORE
+          </button>
+        </div>
+
+        <!-- Subject Card 3 -->
+        <div
+          class="flex flex-col justify-between border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200"
+          data-aos="fade-up">
+          <div class="p-4">
+            <img src="https://drive.google.com/thumbnail?id=1eR_hkcznl8KCAWKROkkQPLPjv33fDgqy&sz=w1026-h1026"
+              alt="Digital Electronics" class="w-full h-48 object-cover mb-4" />
+            <p class="text-md font-bold text-gray-500 dark:text-gray-400 text-center">
+              E&I
+            </p>
+            <h2 class="text-lg uppercase font-semibold text-center mt-2 dark:text-white">
+              Digital Electronics
+            </h2>
+          </div>
+          <button class="btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+            onclick="window.open('https://drive.google.com/file/d/1hR4FZJezO23G7zet47UUnN3N1xK-CiAP/view?usp=drive_link', '_blank')">
+            EXPLORE
+          </button>
+        </div>
+
+        <!-- Subject Card 4 -->
+        <div
+          class="flex flex-col justify-between border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200"
+          data-aos="fade-up">
+          <div class="p-4">
+            <img src="https://drive.google.com/thumbnail?id=1ROR8ELN6YDZsLM7mt_cUm634UjHz5cpH&sz=w1026-h1026"
+              alt="Robotics" class="w-full h-48 object-cover mb-4" />
+            <p class="text-md font-bold text-gray-500 dark:text-gray-400 text-center">
+              MECH
+            </p>
+            <h2 class="text-lg uppercase font-semibold text-center mt-2 dark:text-white">
+              Robotics
+            </h2>
+          </div>
+          <button class="btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+            onclick="window.open('https://drive.google.com/drive/folders/1sXhFZcGeQeaTZ9JRhuJszkjKyvPig2PA', '_blank')">
+            EXPLORE
+          </button>
+        </div>
+
+        <!-- Subject Card 5 -->
+        <div
+          class="flex flex-col justify-between border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200"
+          data-aos="fade-up">
+          <div class="p-4">
+            <img src="https://drive.google.com/thumbnail?id=1sk1h1GbF_jkLEbrfc8NZvNIZGnd0qswl&sz=w1026-h1026"
+              alt="Economics" class="w-full h-48 object-cover mb-4" />
+            <p class="text-md font-bold uppercase text-gray-500 dark:text-gray-400 text-center">
+              ALL
+            </p>
+            <h2 class="text-lg uppercase font-semibold text-center mt-2 dark:text-white">
+              Economics
+            </h2>
+          </div>
+          <button class="btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+            onclick="window.open('https://drive.google.com/drive/folders/1zGo0whR-7icioRtLI8fWXBCPrgOKGnt_', '_blank')">
+            EXPLORE
+          </button>
+        </div>
+
+        <!-- Subject Card 6 -->
+        <div
+          class="flex flex-col justify-between border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200"
+          data-aos="fade-up">
+          <div class="p-4">
+            <img src="https://drive.google.com/thumbnail?id=1173czQpnNpvCBiDiY9OavsHBsNz1ikaZ&sz=w1026-h1026"
+              alt="Digital Electronics" class="w-full h-48 object-cover mb-4" />
+            <p class="text-md font-bold text-gray-500 dark:text-gray-400 text-center">
+              CSE
+            </p>
+            <h2 class="text-lg uppercase font-semibold text-center mt-2 dark:text-white">
+              Object Oriented Programming
+            </h2>
+          </div>
+          <button class="btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+            onclick="window.open('https://drive.google.com/file/d/1uiAFw5bDvzgL8kyJexjPgWusEstA3H-d/view?usp=drive_link', '_blank')">
+            EXPLORE
+          </button>
+        </div>
+        <!-- Add more subject cards as needed -->
+      </div>
+    </div>
+
+    <!-- Departments -->
+    <div id="all-department"></div>
+    <div class="container mx-auto px-4 py-8" data-aos="fade-up">
+      <h1 class="text-3xl font-bold text-center mb-8 dark:text-white" data-aos="zoom-in-up">
+        ALL
+        <span class="text-purple-700 dark:text-purple-400">Departments</span>
+      </h1>
+
+      <!-- Swiper Container -->
+      <div class="relative">
+        <!-- Comment out the navigation arrows -->
+        <!-- 
+          <div class="swiper-button-prev custom-nav-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <div class="swiper-button-next custom-nav-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </div>
+          -->
+
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <!-- Department Card 1 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1Pgr8SO3Zq9C0aQllmteTu8K77BI0riAQ&sz=w1026-h1026"
+                    alt="CSE" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Computer Science and Engineering
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1vz9RgaQP9_KDJn-IczUnv98uaxO2K6v7?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 2 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1pPkGgLBxTq3agB7KoqtJpqv8O_3FPo26&sz=w1026-h1026"
+                    alt="IT" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Information Technology
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1pbn8aEm4yH3-VIG98fDg83lI4ZS85Rfc?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 3 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1x7fS6tjUBnba4m4lLD17wB_EQxArGWzy&sz=w1026-h1026"
+                    alt="ME" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Mechanical Engineering
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/15yIY1lv8ms00Ku6AY7QWj4DQhRvHrQUL?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 4 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1QZLnzjfauFDo8Rbb5DZDMF38D3XiFnW6&sz=w1026-h1026"
+                    alt="AI&R" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Mechanical Engineering(Robotics & AI)
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1mmM2rp9R8wZnVyrYVaOR6BUdVJDIaq1b?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 5 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1i6YN6i2ODn8nyGQXoVeQi6tVfH2Xh5Gs&sz=w1026-h1026"
+                    alt="EE" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Electrical Engineering
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1OggkqgeF1slgTTbjvhWlfQ0FTYiVv4Jr?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 6 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1amMnnUkGPn2nfd0BXhFJK99cBvEhNNRW&sz=w1026-h1026"
+                    alt="E&I" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Electronics and Instrumentation Engineering
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1showttW6uijhceYbi0D03ITJacKGdKK_?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 7 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1qsWREADRtawZ-KBCIp6UUpRhj44cSV1B&sz=w1026-h1026"
+                    alt="CE" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Civil Engineering
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1YvKdGcron3JOoDw4M2Ti8jXAk53tKZiU?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 8 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1uMXdgNWexqgbHiROE4Qp_m6AJb2f5IQv&sz=w1026-h1026"
+                    alt="BT" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Biotechnology
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1s3oGpWo3wyS7tGnzL_B9pdpOo9szGYBu?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 9 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1ZbfvpC7rh1a1nqytNTqoGeKvkdznPMXM&sz=w1026-h1026"
+                    alt="AIML" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Computer Science Engineering(AI & ML)
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1acc0cYYry6uoT1kcO-QoD8TjTBfO_Vvr?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 10 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1PqnWKvj40iRmT0cvY6FYSxlmYlrJ7tsz&sz=w1026-h1026"
+                    alt="ECE" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Electrical & Communication Engineering
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1TPGiENTbtQZ7uOYM_zpiq5Gg4ovyL96-?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 11 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=19nbYxt5VNFAfE_SZMtRIRPOtwbJQUCYj&sz=w1026-h1026"
+                    alt="Planning" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Planning
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1Iy_nx9fP9SL46yjCuE0WOsiRWS6sUTtA?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 12 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1uhEbO0PDhgNk0myI3Xp5AsHb9vP8lb7G&sz=w1026-h1026"
+                    alt="Textile" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Textile Engineering
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1LnInpQBVN9j1gav-UIsEzcsrEqJmrv6R?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Card 13 -->
+            <div class="swiper-slide">
+              <div
+                class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800 dark:border-gray-700 transition-colors duration-200">
+                <div class="p-4 flex flex-col h-full">
+                  <img src="https://drive.google.com/thumbnail?id=1wAWEdYDPrVRbK9t742o5N9JugnjvyGQC&sz=w1026-h1026"
+                    alt="COE" class="w-full h-48 object-cover mb-2" />
+                  <h2 class="text-lg uppercase font-semibold text-center mb-2 dark:text-white">
+                    Computer of Engineering
+                  </h2>
+                  <button
+                    class="mt-auto btn btn-primary dark:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+                    onclick="window.open('https://drive.google.com/drive/folders/1vz9RgaQP9_KDJn-IczUnv98uaxO2K6v7?usp=sharing', '_blank')">
+                    EXPLORE
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Add more department cards as needed -->
+          </div>
+          <!-- Add pagination -->
+          <div class="swiper-pagination mt-6"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 5,
+      spaceBetween: 30,
+      centeredSlides: true,
+      initialSlide: 2,
+      loop: true,
+      watchSlidesProgress: true,
+      effect: "coverflow",
+      coverflowEffect: {
+        rotate: 0,
+        stretch: 0,
+        depth: 100,
+        modifier: 1.5,
+        slideShadows: false,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next.custom-nav-btn",
+        prevEl: ".swiper-button-prev.custom-nav-btn",
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        type: "bullets",
+      },
+      on: {
+        init: function () {
+          // Force update on init
+          this.update();
+        },
+        resize: function () {
+          // Force update on resize
+          this.update();
+        },
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 10,
+          initialSlide: 0,
+        },
+        640: {
+          slidesPerView: 3,
+          spaceBetween: 20,
+          initialSlide: 1,
+        },
+        1024: {
+          slidesPerView: 5,
+          spaceBetween: 30,
+          initialSlide: 2,
+        },
+      },
+    });
+
+    // Force update after a small delay to ensure proper layout
+    setTimeout(() => {
+      swiper.update();
+    }, 100);
+  </script>
+
+  <!-- Why Choose Us -->
+  <section class="py-16 px-4 md:px-8" id="wcu-heading">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12 dark:text-white" data-aos="zoom-in-down">
+        Why
+        <span class="text-purple-700 dark:text-purple-400">Choose us ?</span>
+      </h2>
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
+        <div class="md:w-1/3" data-aos="fade-right">
+          <img src="https://drive.google.com/thumbnail?id=1y4d6bXyLQyAfKlTTLaf8Oe4asI-VWF0A" alt="Student thinking"
+            class="w-full h-auto" />
+        </div>
+        <div class="md:w-2/3 space-y-6" data-aos="fade-right">
+          <div class="flex items-start gap-4 pb-6 border-b border-yellow-400">
+            <img src="https://drive.google.com/thumbnail?id=1bZFzdkxf9LeeMNrvh3K2HS4WIWWEp4Ua"
+              alt="Organised study material" class="w-10 h-10 flex-shrink-0" />
+            <div>
+              <h3 class="font-bold text-2xl text-purple-700 dark:text-purple-400 mb-2">
+                Organised study material
+              </h3>
+              <p class="text-black text-lg font-semibold dark:text-gray-200">
+                Categorized notes and resources, ensuring students can find
+                what they need quickly, saving valuable study time.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 pb-6 border-b border-orange-400 font-bold" data-aos="fade-right">
+            <img src="https://drive.google.com/thumbnail?id=17VI-_sy-INv2z2h7S4ud_kfGLPq1NLPL"
+              alt="Accessible Anytime Anywhere" class="w-10 h-10 flex-shrink-0" />
+            <div>
+              <h3 class="font-bold text-2xl text-purple-700 dark:text-purple-400 mb-2">
+                Accessible Anytime Anywhere
+              </h3>
+              <p class="text-black text-lg font-semibold dark:text-gray-200">
+                Our platform is accessible across devices, ensuring you can
+                study whenever it's convenient for you.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 pb-6 border-b border-blue-400" data-aos="fade-right">
+            <img src="https://drive.google.com/thumbnail?id=1lw6nrHNE4HzECnXP6_VeswFIbjcwOSG2"
+              alt="Regularly Updated Content" class="w-10 h-10 flex-shrink-0" />
+            <div>
+              <h3 class="font-bold text-2xl text-purple-700 dark:text-purple-400 mb-2">
+                Regularly Updated Content
+              </h3>
+              <p class="text-black text-lg font-semibold dark:text-gray-200">
+                Stay ahead with notes that are constantly updated to reflect
+                the latest academic curriculum and exam patterns.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4" data-aos="fade-right">
+            <img src="https://drive.google.com/thumbnail?id=1PD3AYhmAdeYrWjuyOi3xROnzsUohtwUA"
+              alt="Support multiple subjects" class="w-10 h-10 flex-shrink-0" />
+            <div>
+              <h3 class="font-bold text-2xl text-purple-700 dark:text-purple-400 mb-2">
+                Support multiple subjects:
+              </h3>
+              <p class="text-black text-lg font-semibold dark:text-gray-200">
+                We offer resources across a range of subjects, helping you
+                excel in your studies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="p-8" id="about">
+    <div class="max-w-5xl mx-auto">
+      <h1 class="text-3xl font-bold text-center mb-8 dark:text-white" data-aos="zoom-in-up">
+        About
+        <span class="text-purple-700 dark:text-purple-400">EduTR</span>
+      </h1>
+      <div class="grid grid-cols-1 gap-16 md:grid-cols-2">
+        <!-- Column 1: Our Mission and Our Values -->
+        <div class="space-y-4 grid grid-cols-1 gap-16">
+          <article
+            class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
+            data-aos="flip-left">
+            <h2 class="text-xl font-bold mb-4 text-purple-700 dark:text-purple-400 text-center">
+              Our Mission
+            </h2>
+            <p class="text-center dark:text-gray-200">
+              We strive to deliver innovative solutions that empower
+              businesses and individuals to reach their full potential in the
+              digital world.
+            </p>
+          </article>
+          <article
+            class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
+            data-aos="flip-left">
+            <h2 class="text-xl font-bold mb-4 text-purple-700 dark:text-purple-400 text-center">
+              Our Values
+            </h2>
+            <p class="text-center dark:text-gray-200">
+              Integrity, collaboration, and continuous improvement are at the
+              core of everything we do, guiding our decisions and actions.
+            </p>
+          </article>
+        </div>
+        <!-- Column 2: Our Team -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow duration-300"
+          data-aos="flip-right">
+          <h2 class="text-xl font-bold mb-4 text-purple-700 dark:text-purple-400 text-center">
+            Our Team
+          </h2>
+          <ul class="space-y-6 flex flex-col items-center md:items-start">
+            <li class="flex items-center">
+              <img src="https://drive.google.com/thumbnail?id=15eqpCBfzhRW1LDwZxC4U50Brye-7jewN" alt="Abhinash" class="w-16 h-16 rounded-full mr-4" />
+              <div>
+                <h3 class="font-bold text-gray-800 dark:text-white">
+                  Abhinash Pritiraj
+                </h3>
+                <p class="text-gray-600 dark:text-gray-200">
+                  Information Technology
+                </p>
+                <p class="text-gray-600 dark:text-gray-200">2022-2026</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <img src="" alt="Shubhashree" class="w-16 h-16 rounded-full mr-4" />
+              <div>
+                <h3 class="font-bold text-gray-800 dark:text-white">
+                  Shubhashree Mohanty
+                </h3>
+                <p class="text-gray-600 dark:text-gray-200">
+                  Information Technology
+                </p>
+                <p class="text-gray-600 dark:text-gray-200">2023-2027</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <img src="" alt="Monalisha" class="w-16 h-16 rounded-full mr-4" />
+              <div>
+                <h3 class="font-bold text-gray-800 dark:text-white">
+                  Monalisha Patra
+                </h3>
+                <p class="text-gray-600 dark:text-gray-200">
+                  Information Technology
+                </p>
+                <p class="text-gray-600 dark:text-gray-200">2023-2027</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <img src="" alt="Utkal" class="w-16 h-16 rounded-full mr-4" />
+              <div>
+                <h3 class="font-bold text-gray-800 dark:text-white">
+                  Utkal Kumar Das
+                </h3>
+                <p class="text-gray-600 dark:text-gray-200">
+                  Information Technology
+                </p>
+                <p class="text-gray-600 dark:text-gray-200">2023-2027</p>
+              </div>
+            </li>
+            <li class="flex items-center">
+              <img src="https://drive.google.com/thumbnail?id=1VRbaxBwfiDDyYPUwlYW3VX1cEmWnNdWD" alt="Puneet" class="w-16 h-16 rounded-full mr-4" />
+              <div>
+                <h3 class="font-bold text-gray-800 dark:text-white">
+                  Puneet Dhal
+                </h3>
+                <p class="text-gray-600 dark:text-gray-200">
+                  Information Technology
+                </p>
+                <p class="text-gray-600 dark:text-gray-200">2023-2027</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact py-16 px-4 md:px-8 lg:px-16" id="contact">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Contact Form -->
+        <div
+          class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md lg:order-1 order-2 transition-colors duration-200"
+          data-aos="flip-left">
+          <h3 class="text-2xl text-purple-700 dark:text-purple-400 font-bold mb-6">
+            Send us a message
+          </h3>
+          <form class="space-y-4" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" id="contactAccessKey" />
+            <div>
+              <label for="name" class="block text-sm font-medium text-purple-700 dark:text-purple-400 mb-1">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name"
+                class="w-full px-3 py-2 text-base sm:text-lg border rounded-md" style="font-size: 16px" required />
+            </div>
+
+            <div>
+              <label for="email"
+                class="block text-sm font-medium text-purple-700 dark:text-purple-400 mb-1">Email</label>
+              <input type="email" id="email" name="email" placeholder="Email address"
+                class="w-full px-3 py-2 text-base sm:text-lg border rounded-md" style="font-size: 16px" />
+            </div>
+            <div>
+              <label for="phone"
+                class="block text-sm font-medium text-purple-700 dark:text-purple-400 mb-1">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="+1-222-333-4444"
+                class="w-full px-3 py-2 text-base sm:text-lg border rounded-md" style="font-size: 16px" />
+            </div>
+            <div>
+              <label for="message"
+                class="block text-sm font-medium text-purple-700 dark:text-purple-400 mb-1">Message</label>
+              <textarea id="message" name="message" rows="4" placeholder="Write your message"
+                class="w-full px-3 py-2 text-base sm:text-lg border rounded-md" style="font-size: 16px"></textarea>
+            </div>
+            <button type="submit"
+              class="w-full bg-purple-700 dark:bg-purple-700 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors dark:bg-purple-600 dark:hover:bg-purple-700">
+              Send message
+            </button>
+          </form>
+        </div>
+
+        <!-- Left Side -->
+        <div class="space-y-8 lg:order-2 order-1" data-aos="fade-right">
+          <div class="space-y-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-purple-700 dark:text-purple-400 flex items-center">
+              Love to hear from you,
+            </h2>
+            <p class="text-gray-600 dark:text-gray-200">
+              We provide resources for OUTR students that are very detailed
+              and covers all the topics of syllabus By refering to these notes
+              and exam material you can ace you semester exam. As Engineering
+              students we have our motto: <br />
+              <b>if tomorrow isn't the due date, then today isn't the do
+                date</b>
+              <br />So to tackel this we provide you exam resources that will
+              help you ace your exams.
+            </p>
+          </div>
+
+          <!-- Testimonial Card -->
+          <div
+            class="bg-purple-700 dark:bg-gray-800 text-white p-6 rounded-2xl shadow-lg transform -rotate-2 transition-all duration-200 hover:rotate-0 review active">
+            <div class="flex mb-4">
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+            </div>
+            <p class="mb-4">
+              "Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Sapiente hic itaque ex temporibus ipsum beatae similique nulla
+              accusantium amet unde laudantium in vel consequuntur quo minima
+              aut, rerum deserunt nostrum?"
+            </p>
+            <div class="flex items-center">
+              <img src="https://drive.google.com/thumbnail?id=1pU_9r_xVt4ThEaYHffpVl1CZeU2X37lq" alt="Subham Parida"
+                class="w-[100px] h-[100px] mr-3" />
+              <div>
+                <p class="font-semibold">Subham Parida</p>
+                <p class="text-sm opacity-75">Network Enginner, Tejas Network</br>OUTR-CSE'25</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-purple-700 dark:bg-gray-800 text-white p-6 rounded-2xl shadow-lg transform -rotate-2 transition-all duration-200 hover:rotate-0 review active">
+            <div class="flex mb-4">
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+            </div>
+            <p class="mb-4">
+              "Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Sapiente hic itaque ex temporibus ipsum beatae similique nulla
+              accusantium amet unde l"
+            </p>
+            <div class="flex items-center">
+              <img src="https://drive.google.com/thumbnail?id=1BuZPt1gJR8H1eoKR87zbni-eijaqAeBS"
+                alt="Vaishnav Ku. Tayal" class="w-[100px] h-[100px] mr-3" />
+              <div>
+                <p class="font-semibold">Vaishnav Kumar Tayal</p>
+                <p class="text-sm opacity-75">Convenor, Zairza</br>OUTR-IT'25</p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-purple-700 dark:bg-gray-800 text-white p-6 rounded-2xl shadow-lg transform -rotate-2 transition-all duration-200 hover:rotate-0 review active">
+            <div class="flex mb-4">
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+              <span class="w-5 h-5 fill-current">⭐</span>
+            </div>
+            <p class="mb-4">
+              "Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+              Sapiente hic itaque ex temporibus ipsum beatae similique nulla "
+            </p>
+            <div class="flex items-center">
+              <img src="https://drive.google.com/thumbnail?id=1BmgJW-9cznwnFZtMurYUM2hYq6GXXxiq" alt="Abhinaba Dash"
+                class="w-[100px] h-[100px] mr-3" />
+              <div>
+                <p class="font-semibold">Abhinaba Dash</p>
+                <p class="text-sm opacity-75">SWE, TCS</br>OUTR-IT'25</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const reviews = document.querySelectorAll(".review");
+    let currentIndex = 0;
+    let interval;
+
+    function showReview(index) {
+      reviews.forEach((review, i) => {
+        if (i === index) {
+          review.classList.add("active");
+          review.style.display = "block";
+        } else {
+          review.classList.remove("active");
+          review.style.display = "none";
+        }
+      });
+    }
+
+    function startCarousel() {
+      interval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % reviews.length;
+        showReview(currentIndex);
+      }, 3000);
+    }
+
+    function stopCarousel() {
+      clearInterval(interval);
+    }
+
+    reviews.forEach((review) => {
+      review.addEventListener("mouseover", stopCarousel);
+      review.addEventListener("mouseout", startCarousel);
+    });
+
+    showReview(currentIndex);
+    startCarousel();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/body-parser@1.20.3/index.min.js"></script>
+
+  <!-- Footer Section -->
+  <footer
+    class="bg-purple-700 dark:bg-gray-800 text-center py-12 flex flex-col gap-4 rounded-t-[25%] mt-6 transition-colors duration-200"
+    data-aos="fade-up">
+    <div class="flex justify-center items-center gap-2 sm:gap-4 px-4">
+      <!-- Logo container -->
+      <div class="relative flex items-center justify-center">
+        <div class="w-8 h-8 sm:w-12 sm:h-12 bg-[#a77deb] rotate-45 absolute rounded-sm animate-pulse shadow-lg"></div>
+        <h4 id="footer-logo" class="relative ml-2 sm:ml-4 text-2xl sm:text-4xl font-bold tracking-wider text-white">
+          EduTR
+        </h4>
+      </div>
+      <!-- Divider -->
+      <div class="w-[2px] sm:w-[4px] h-12 sm:h-16 bg-white dark:bg-white mx-2 sm:ml-6"></div>
+      <!-- Image container with responsive sizing -->
+      <img src="https://drive.google.com/thumbnail?id=1Y2QSLXxiLBiUcz9Ks3I8EpekVXVn7ZS3&sz=w200-h70" alt="Zairza"
+        class="h-8 sm:h-12 w-auto object-contain" />
+    </div>
+
+    <!-- Rest of the footer content -->
+    <div class="mt-4 px-4">
+      <h5 class="text-white text-sm sm:text-md font-bold mb-2">
+        Contact Us for any kind of query
+      </h5>
+      <form id="footerContactForm" action="https://api.web3forms.com/submit" method="POST"
+        class="flex justify-center px-4">
+        <input type="hidden" name="access_key" id="accessKey" />
+        <input type="text" id="footer-message" name="message"
+          class="border border-white bg-transparent px-3 sm:px-4 py-2 rounded text-xs sm:text-sm text-white mr-2 sm:mr-4 placeholder-white font-bold w-full max-w-xs"
+          placeholder="Your message" required />
+        <button type="submit"
+          class="bg-white dark:bg-gray-700 shadow-lg px-3 sm:px-4 py-2 rounded text-purple-900 dark:text-white font-bold text-base sm:text-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200 whitespace-nowrap">
+          Send
+        </button>
+      </form>
+    </div>
+
+    <div class="text-center px-4 mb-2 text-white font-bold">
+      <p>Come and know more about Zairza and join our community to experience such more amazing stuff.</p>
+    </div>
+    <div class="flex justify-center space-x-9 mb-2">
+      <a href="https://www.facebook.com/zairza.cetb" target="_blank" class="text-white hover:text-gray-300">
+        <i class="fab fa-facebook-f text-xl"></i>
+      </a>
+      <a href="https://x.com/zairza_cetb" target="_blank" class="text-white hover:text-gray-300">
+        <i class="fab fa-twitter text-xl"></i>
+      </a>
+      <a href="https://www.youtube.com/@zairzarobosofdescluboutrb1825" target="_blank"
+        class="text-white hover:text-gray-300">
+        <i class="fab fa-youtube text-xl"></i>
+      </a>
+      <a href="mailto:cet.sac.zairza@gmail.com" target="_blank" class="text-white hover:text-gray-300">
+        <i class="fas fa-envelope text-xl"></i>
+      </a>
+      <a href="https://www.instagram.com/zairza.outr/" target="_blank" class="text-white hover:text-gray-300">
+        <i class="fab fa-instagram text-xl"></i>
+      </a>
+      <a href="https://www.linkedin.com/company/zairza/posts/?feedView=all" target="_blank"
+        class="text-white hover:text-gray-300">
+        <i class="fab fa-linkedin-in text-xl"></i>
+      </a>
+    </div>
+    <div class="text-center mb-2 text-white">
+      <p>OUTR (CET Campus), Kalinga Nagar, Ghatikia, Bhubaneswar, Odisha. +91 9556774130</p>
+    </div>
+    <div class="flex justify-center items-center mb-2 font-bold text-white">
+      <span class="mr-2">Presented by</span>
+      <img src="https://drive.google.com/thumbnail?id=1guK8aYFn3U0cqjwjl4JCCRl4uPvQRIYE" alt="Zairza Logo"
+        class="h-12 bg-transparent">
+    </div>
+
+    <div>
+      <p class="text-white font-bold text-xs sm:text-md mt-2">
+        © 2024 EduTR. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- AOS Initialize -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true  // Add this line to prevent reverse animation
+    });
+  </script>
+
+  <script>
+    function navigateToSubjects() {
+      document.body.classList.add("page-transition");
+      setTimeout(() => {
+        window.location.href = "subject.html";
+      }, 300);
+    }
+
+    // Handle back/forward navigation
+    window.addEventListener("pageshow", function (event) {
+      document.body.classList.remove("page-transition");
+    });
+  </script>
+
+  <!-- Add this script after your existing scripts -->
+  <script>
+    function addHomeShimmerPlaceholders() {
+      // Hero section shimmer
+      const heroShimmer = `
+          <section class="min-h-[90vh] flex items-center">
+            <div class="container mx-auto px-4 py-8 sm:py-12 md:py-24 flex flex-col md:flex-row-reverse items-center justify-between">
+              <!-- Rest of the shimmer content remains the same -->
+            </div>
+          </section>
+        `;
+
+      // Popular subjects shimmer - match exact card dimensions
+      const subjectCardShimmer = `
+          <div class="flex flex-col justify-between border bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+            <div class="p-4">
+              <!-- Image placeholder - match actual image size -->
+              <div class="w-full h-48 object-cover mb-4">
+                <div class="w-full h-full shimmer rounded-lg"></div>
+              </div>
+              <!-- Department text -->
+              <p class="text-md font-bold text-center">
+                <div class="h-6 w-12 mx-auto shimmer rounded"></div>
+              </p>
+              <!-- Title -->
+              <h2 class="text-lg uppercase font-semibold text-center mt-2">
+                <div class="h-7 w-full mx-auto shimmer rounded"></div>
+              </h2>
+              <!-- Button -->
+              <button class="w-full mt-4">
+                <div class="h-[42px] w-full shimmer rounded-md"></div>
+              </button>
+            </div>
+          </div>
+        `;
+
+      // Department cards shimmer - match swiper slide dimensions
+      const departmentCardShimmer = `
+          <div class="swiper-slide">
+            <div class="flex-shrink-0 w-72 border rounded-lg shadow-lg overflow-hidden dark:bg-gray-800">
+              <div class="p-4 flex flex-col h-full">
+                <!-- Image placeholder -->
+                <div class="w-full h-48 object-cover mb-2">
+                  <div class="w-full h-full shimmer rounded-lg"></div>
+                </div>
+                <!-- Title -->
+                <h2 class="text-lg uppercase font-semibold text-center mb-2">
+                  <div class="h-7 w-full mx-auto shimmer rounded"></div>
+                </h2>
+                <!-- Button -->
+                <button class="w-full mt-4">
+                  <div class="h-[42px] w-full shimmer rounded-md"></div>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+
+      // Add shimmer placeholders to respective containers
+      const mainContent = document.querySelector("main");
+      if (mainContent) {
+        const shimmerContent = `
+            ${heroShimmer}
+            <div class="container mx-auto px-4 py-8">
+              <div class="h-10 w-64 mx-auto shimmer rounded-lg mb-8"></div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                ${Array(6).fill(subjectCardShimmer).join("")}
+              </div>
+            </div>
+            <div class="container mx-auto px-4 py-8">
+              <div class="h-10 w-64 mx-auto shimmer rounded-lg mb-8"></div>
+              <div class="swiper-wrapper">
+                ${Array(4).fill(departmentCardShimmer).join("")}
+              </div>
+            </div>
+          `;
+        mainContent.innerHTML = shimmerContent;
+      }
+    }
+
+    // Use this function when loading content
+    document.addEventListener("DOMContentLoaded", function () {
+      if (document.body.classList.contains("loading")) {
+        addHomeShimmerPlaceholders();
+      }
+    });
+  </script>
+
+  <!-- Scroll to top button -->
+  <button id="scrollToTop"
+    class="fixed bottom-6 right-6 bg-purple-600 dark:bg-purple-700 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transform transition-all duration-300 scale-0 hover:bg-purple-700 dark:hover:bg-purple-800 focus:outline-none">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+
+  <script>
+    // Scroll to top functionality
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+
+    window.addEventListener('scroll', () => {
+      // Show button when user has scrolled 50% of the page
+      const scrolled = window.scrollY;
+      const threshold = document.documentElement.scrollHeight * 0.5;  // Changed from 0.7 to 0.5
+
+      if (scrolled > threshold) {
+        scrollToTopBtn.classList.remove('scale-0');
+        scrollToTopBtn.classList.add('scale-100');
+      } else {
+        scrollToTopBtn.classList.remove('scale-100');
+        scrollToTopBtn.classList.add('scale-0');
+      }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+
+</body>
+
+</html>

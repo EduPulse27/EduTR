@@ -1,0 +1,2255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Educational Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- box icons -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- lucide icons -->
+    <script src="https://unpkg.com/lucide@0.24.0/dist/lucide.js"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "thirty-pr-color": "#3b82f6",
+              "ten-pr-color": "#f59e0b",
+            },
+          },
+        },
+      };
+    </script>
+    <!-- Theme initialization script - must be first -->
+    <script>
+      // Immediately restore dark mode if it was active
+      if (localStorage.getItem("color-theme") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const themeToggleBtn = document.getElementById("theme-toggle");
+        const themeToggleDarkIcon =
+          document.getElementById("theme-toggle-dark");
+        const themeToggleLightIcon =
+          document.getElementById("theme-toggle-light");
+        const themeToggleText = document.getElementById("theme-toggle-text");
+
+        // Set initial state
+        function updateTheme() {
+          const isDark = localStorage.getItem("color-theme") === "dark";
+          document.documentElement.classList.toggle("dark", isDark);
+          themeToggleLightIcon.classList.toggle("hidden", !isDark);
+          themeToggleDarkIcon.classList.toggle("hidden", isDark);
+          themeToggleText.textContent = isDark ? "Light Mode" : "Dark Mode";
+        }
+
+        // Initialize theme
+        updateTheme();
+
+        // Add click event listener
+        themeToggleBtn.addEventListener("click", () => {
+          const isDark = localStorage.getItem("color-theme") === "dark";
+          localStorage.setItem("color-theme", isDark ? "light" : "dark");
+          updateTheme();
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Show shimmer effect
+        document.body.classList.add("loading");
+
+        // Hide shimmer and show content when everything is loaded
+        window.addEventListener("load", function () {
+          setTimeout(() => {
+            document.body.classList.remove("loading");
+            document.body.classList.add("loading-complete");
+          }, 300);
+        });
+      });
+    </script>
+  </head>
+
+  <div class="banter-loader" id="banter-loader">
+    <div class="banter-loader__box"></div>
+    <div class="banter-loader__box"></div>
+    <div class="banter-loader__box"></div>
+    <div class="banter-loader__box"></div>
+    <div class="banter-loader__box"></div>
+    <div class="banter-loader__box"></div>
+    <div class="banter-loader__box"></div>
+    <div class="banter-loader__box"></div>
+    <div class="banter-loader__box"></div>
+  </div>
+      
+  <script>
+    var loader=document.getElementById("banter-loader");
+    window.addEventListener("load",function (){
+      loader.style.display="none";
+      
+    })
+  </script>
+
+
+  <body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+    <header
+      class="visible sticky top-0 z-50 bg-white dark:bg-gray-800 transition-colors duration-200"
+      id="home-header"
+    >
+      <nav class="flex justify-between items-center p-4 dark:text-gray-100">
+        <div class="relative flex items-center">
+          <h4
+            id="header-logo"
+            class="relative text-purple-700 dark:text-purple-400 text-2xl font-bold tracking-wider"
+          >
+            EduTR
+          </h4>
+        </div>
+        <div class="flex items-center space-x-4">
+          <button
+            id="theme-toggle"
+            class="flex items-center gap-2 px-3 py-2 rounded-md font-medium transition-all duration-200 ease-in-out bg-purple-100 text-purple-700 hover:bg-purple-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+          >
+            <svg
+              id="theme-toggle-light"
+              class="hidden w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+              />
+            </svg>
+            <svg
+              id="theme-toggle-dark"
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+              />
+            </svg>
+            <span id="theme-toggle-text">Dark Mode</span>
+          </button>
+          <a
+            href="index.html"
+            class="bg-purple-600 dark:bg-purple-700 text-white px-3 py-2 rounded-md hover:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200"
+          >
+            Home
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <!-- Department Dropdown -->
+        <div class="relative">
+          <select
+            id="department-input"
+            class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg p-4 shadow-md appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer dark:text-gray-200"
+          >
+            <option value="">Select Department</option>
+            <option value="CSE">Computer Science Engineering</option>
+            <option value="AIML">Computer Science Engineering(AI&ML)</option>
+            <option value="IT">Information Technology</option>
+            <option value="ME">Mechanical Engineering</option>
+            <option value="AIR">Mechanical Engineering(Robotics & AI)</option>
+            <option value="EE">Electrical Engineering</option>
+            <option value="ECE">Electronics & Communication Engineering</option>
+            <option value="EnI">
+              Electrical & Instrumentation Engineering
+            </option>
+            <option value="CE">Civil Engineering</option>
+            <option value="BT">Biotechnology</option>
+            <option value="COE">Computer of Engineering</option>
+            <option value="Planning">Planning</option>
+            <option value="Textile">Textile Engineering</option>
+          </select>
+        </div>
+
+        <!-- Semester Dropdown -->
+        <div class="relative">
+          <select
+            id="semester-input"
+            class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg p-4 shadow-md appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer dark:text-gray-200"
+          >
+            <option value="">Select Semester</option>
+            <option value="First">First</option>
+            <option value="Second">Second</option>
+            <option value="Third">Third</option>
+            <option value="Fourth">Fourth</option>
+            <!-- <option value="Fifth">Fifth</option>
+            <option value="Sixth">Sixth</option>
+            <option value="Seventh">Seventh</option>
+            <option value="Eighth">Eighth</option> -->
+          </select>
+        </div>
+
+        <!-- Subject input -->
+        <div class="relative">
+          <input
+            id="subject-input"
+            type="text"
+            placeholder="Subject or Course Code"
+            class="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg p-4 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:text-gray-200"
+          />
+        </div>
+      </div>
+
+      <div
+        id="subject-cards"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 px-2 sm:px-4"
+      >
+        <!-- Subject cards will be dynamically inserted here -->
+      </div>
+    </main>
+
+    <script>
+      const subjects = [
+        {
+          id: 1,
+          title: "Mathematics 1",
+          code: "BH1441",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planning",
+            "Textile",
+          ],
+          semester: ["First"],
+          image:
+            "https://drive.google.com/thumbnail?id=1ULNMrR8dId6qIAoE1sdZWny9xMwqNl71&sz=w1026-h1026",
+          notes:
+            "https://drive.google.com/drive/folders/1Aedqgg04qR0enYaMJ7dSQ7vQH7xaPmq-?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/1HYzv4QHoPk0YhENGrj0HP-9ASipjdFZl/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1Aedqgg04qR0enYaMJ7dSQ7vQH7xaPmq-?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1Aedqgg04qR0enYaMJ7dSQ7vQH7xaPmq-?usp=drive_link",
+        },
+        {
+          id: 2,
+          title: "Mathematics 2",
+          code: "BH1442",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planning",
+            "Textile",
+          ],
+          semester: ["Second"],
+          image:
+            "https://drive.google.com/thumbnail?id=1ULNMrR8dId6qIAoE1sdZWny9xMwqNl71&sz=w1026-h1026",
+          notes:
+            "https://drive.google.com/file/d/1SCnD7H0sHDgUHnSPcNjL-4HMYov7tfy4/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/1YOQG-IpHaz_YqOe7dGvxaA91K25xmgQ-/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1kFuzgKkUqPzkHXsDnOMRdh-Ze9UtqaeC?usp=drive_link",
+          resource:
+            "https://docs.google.com/document/d/1ts5Plc4yI5OmP89JuU5CNA_O1qaBKBVCIdXN6QeojuA/edit?usp=sharing",
+        },
+        {
+          id: 3,
+          title: "Mathematics 3",
+          code: "BH2459",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Textile",
+          ],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1ULNMrR8dId6qIAoE1sdZWny9xMwqNl71&sz=w1026-h1026",
+          notes:
+            "https://drive.google.com/file/d/1EFVmtcrQ_RiDYbud0QCr10LVr1rwy7jy/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10yPFkL359TSS8AxJpiNjdosRxlz-IjIF/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1doJxXuRidaZz7QsTwjnzSiklyauHvGhi?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1doJxXuRidaZz7QsTwjnzSiklyauHvGhi?usp=drive_link",
+        },
+        {
+          id: 4,
+          title: "Discrete Mathematics",
+          code: "CS2106",
+          department: ["CSE", "IT", "AIML"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1ULNMrR8dId6qIAoE1sdZWny9xMwqNl71&sz=w1026-h1026",
+          notes:
+            "https://drive.google.com/file/d/1EBkgNFyomOEeRzh0PKpeNhKEvUg03cYh/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/1nTjqLIYNqLsQN9lr2OZ2Do1PMPpgrWSK/view?usp=drive_link",
+          pyq: "https://drive.google.com/file/d/1x-LmDLmk2Ir8701vUwgpw-6qWc3CuKSd/view?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1E8yqkEl0wvhIXSuTZ9R3jEr_XBlFN3kU?usp=drive_link",
+        },
+        {
+          id: 5,
+          title: "Chemistry",
+          code: "BH1401",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planning",
+            "Textile",
+          ],
+          semester: ["First", "Second"],
+          image:
+            "https://drive.google.com/thumbnail?id=11dDEOC64KXfdnAnjV27G2MhTALaZixSy",
+          notes:
+            "https://drive.google.com/file/d/1OvQcQGPwY-_o2UPZ8uZJKuok4IGnzKDS/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/1p3eY1YLZfyVYZfC52U7rhNOx66AuFNzY/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1x_4-EbpfdIaC4gA-_knAyw7XhYX-P6yh?usp=sharing",
+          resource:
+            "https://docs.google.com/document/d/1yy2qy9mJEHCLD2GK44_7SpsO9lSxJRHOhl-1XtntSks/edit?usp=sharing",
+        },
+        {
+          id: 6,
+          title: "Physics",
+          code: "BH1461",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planning",
+            "Textile",
+          ],
+          semester: ["First", "Second"],
+          image:
+            "https://drive.google.com/thumbnail?id=1pj5Hdv4jLll59FhpDoZCR2h_0rOTVb41&sz=w1026-h1026",
+          notes:
+            "https://drive.google.com/file/d/1IsjgQikZfu-EFIHYdYYFTTHyeidhsR3W/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/1NVlrxN66V4x-4hfa51TKPswTY6vi2eDu/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1x_4-EbpfdIaC4gA-_knAyw7XhYX-P6yh?usp=sharing",
+          resource:
+            "https://docs.google.com/document/d/1qvdfLW89QfGzrm9BoydCLjGoXi8I8CM84KPrLHflflI/edit?usp=sharing",
+        },
+        {
+          id: 7,
+          title: "Engineering Economics",
+          code: "BH2439",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planning",
+            "Textile",
+          ],
+          semester: ["Third", "Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1sk1h1GbF_jkLEbrfc8NZvNIZGnd0qswl&sz=w1026-h1026",
+          notes:
+            "https://drive.google.com/file/d/14dSuSAqKwMv9ZP_bm_5bWar_bsIRG_xX/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10XmbFZ3yX9gnyUzh7Fme4o95BIM5fvYE/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1zGo0whR-7icioRtLI8fWXBCPrgOKGnt_?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1zGo0whR-7icioRtLI8fWXBCPrgOKGnt_?usp=drive_link",
+        },
+        {
+          id: 8,
+          title: "Object Oriented Design and Programming",
+          code: "CS2101",
+          department: ["CSE", "IT", "BT", "AIML", "BT"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1173czQpnNpvCBiDiY9OavsHBsNz1ikaZ&sz=w1026-h1026",
+          notes:
+            "https://drive.google.com/file/d/1Agd0F19rArk3SvYI7msTQCaPIiyTVCE6/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/file/d/1LNi4OgoZSCQo2967Jk4cVFWpXcXo9qeK/view?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/18p5Vnt-99V3vhJuEHHmZbcUMmP9gerKv?usp=drive_link",
+        },
+        // {
+        //   id: 9,
+        //   title: "Advanced Computer Architecture",
+        //   code: "ACA101",
+        //   department: ["CSE"],
+        //   semester: ["Fifth"],
+        //   image:
+        //     "https://drive.google.com/thumbnail?id=1h-60VohNUzNr-qm2F2V06NASlpIHm4Ry&sz=w1026-h1026",
+        //   notes:
+        //     "https://drive.google.com/drive/folders/1P9_B-YUd41FHFMd64SzVJ2FTGM9adntP?usp=drive_link",
+        //   syllabus:
+        //     "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+        //   pyq: "",
+        //   resource:
+        //     "https://drive.google.com/drive/folders/1P9_B-YUd41FHFMd64SzVJ2FTGM9adntP?usp=drive_link",
+        // },
+        // {
+        //   id: 10,
+        //   title: "Real Time System",
+        //   code: "RTS101",
+        //   department: ["CSE"],
+        //   semester: ["Fifth"],
+        //   image:
+        //     "https://drive.google.com/thumbnail?id=1feU2yMs5KxrH28ToGs50_gildK8paqlU&sz=w1026-h1026",
+        //   notes:
+        //     "https://drive.google.com/file/d/1e2xSXVZJPf3gBf2EkQlWmM07e7f3SKTa/view?usp=drive_link",
+        //   syllabus:
+        //     "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+        //   pyq: "",
+        //   resource:
+        //     "https://drive.google.com/drive/folders/1PEm0Hl8n8tNbnPXVFbE8cT-P47xMLwmb?usp=drive_link",
+        // },
+        {
+          id: 11,
+          title: "Artificial Intelligence",
+          code: "CS2112",
+          department: ["AIML"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1-WkI_Vtn0RbhoOrqRqxqXYTpZEewKHsK",
+          notes:
+            "https://drive.google.com/file/d/17CYuv5-KCvSFjFZXTmEfWq-gdRpK-xo2/view?usp=sharing",
+          syllabus:
+            "https://drive.google.com/file/d/1yJUw_HIvT3-z19mNUk6uKIOHbuYEGzM0/view?usp=drive_link",
+          pyq: "https://drive.google.com/file/d/1gQsXbgxui5_BKsuZOYcH-msWZ0EHtork/view?usp=drive_link",
+          resource:
+            "https://drive.google.com/file/d/1kIyi3HUI7DtbsAfd_NjcpE-xPNwKlgkX/view?usp=drive_link",
+        },
+        {
+          id: 12,
+          title: "Computer Networks",
+          code: "CS2508",
+          department: ["CSE", "IT"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=12KOoB1B5A6xqp0XPtAL_oOGLSfJ5nUXD",
+          notes:
+            "https://drive.google.com/file/d/1CCUDferLxqDTlGvbDvYamcRYVxQSS-4p/view?usp=sharing",
+          syllabus:
+            "https://drive.google.com/file/d/1Y0LdQ2IJbfAk8UtE5eTy8jTJmfP6Wzea/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1msCp-jCR5F0GozjoQma6zFkJkXhKCMU8?usp=drive_link",
+          resource:
+            "https://youtube.com/playlist?list=PLxCzCOWd7aiGFBD2-2joCpWOLUrDLvVV_&si=ujmLc0QP5RWSfSOt",
+        },
+        // {
+        //   id: 13,
+        //   title: "Compiler Design",
+        //   code: "UPCIT502",
+        //   department: ["CSE", "IT"],
+        //   semester: ["Fifth"],
+        //   image: "",
+        //   notes:
+        //     "https://drive.google.com/file/d/1MYNmBT41UmyEUFjPzmHS8Cb1BAQRfwgs/view?usp=drive_link",
+        //   syllabus:
+        //     "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+        //   pyq: "",
+        //   resource:
+        //     "https://drive.google.com/drive/folders/1rrfpnT8R6d3b-xkc8gxkHbjHzy8RlmCs?usp=drive_link",
+        // },
+        {
+          id: 14,
+          title: "Database System",
+          code: "CS2506",
+          department: ["CSE", "IT"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1n2diN_Vt2ed4dDR2tIfjZJJWscPO13UQ",
+          notes:
+            "https://drive.google.com/drive/folders/17ITzC7dO0P0H7ybAFimDkGixCO_jq27N?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/17ITzC7dO0P0H7ybAFimDkGixCO_jq27N?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/17ITzC7dO0P0H7ybAFimDkGixCO_jq27N?usp=drive_link",
+          resource:
+            "https://youtube.com/playlist?list=PLxCzCOWd7aiFAN6I8CuViBuCdJgiOkT2Y&si=DA5SKfB5vFK37dMY",
+        },
+        // {
+        //   id: 15,
+        //   title: "Internet and Web Technology",
+        //   code: "IWT101",
+        //   department: ["CSE", "IT"],
+        //   semester: ["Sixth"],
+        //   image:
+        //     "https://drive.google.com/thumbnail?id=1lNFt7f_oIZwePKRwKWk_cslgopa9z4Eg&sz=w1026-h1026",
+        //   notes:
+        //     "",
+        //   syllabus:
+        //     "",
+        //   pyq: "",
+        //   resource:
+        //     "",
+        // },
+        {
+          id: 16,
+          title: "Algorithm Analysis and Design",
+          code: "CS2503",
+          department: ["CSE", "IT", "AIML"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1zmRkfVJq56mkyEAvG3HFLBtCGeaicsM-",
+          notes:
+            "https://drive.google.com/file/d/1acl3Q_nDd21RMaBECYSpLc-QvYb5neCL/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1kmXHyfLBQWgJYlUTZqnlZ9vCGxpRGJCY?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1kmXHyfLBQWgJYlUTZqnlZ9vCGxpRGJCY?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/16dIKTbDvjpjicXG1T0BZtgvFrYm8CV6Q?usp=drive_link",
+        },
+        // {
+        //   id: 17,
+        //   title: "Machine Learning",
+        //   code: "ML101",
+        //   department: ["CSE", "IT"],
+        //   semester: ["Seventh"],
+        //   image:
+        //     "https://drive.google.com/thumbnail?id=1wViV0GEvZWL35FK2RYMU2wogElTLYu1Q&sz=w1026-h1026",
+        //   notes:
+        //     "https://drive.google.com/file/d/1-9wcPLkTwqeP2s_DC8BNuBjpv4EqvYda/view?usp=drive_link",
+        //   syllabus:
+        //     "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+        //   pyq: "",
+        //   resource:
+        //     "https://drive.google.com/drive/folders/1-9vHXaJOwko0MaPJPBkDDuK74RKAN4q2?usp=drive_link",
+        // },
+        // {
+        //   id: 18,
+        //   title: "Human Computer Interaction",
+        //   code: "HCI101",
+        //   department: ["CSE", "IT"],
+        //   semester: ["Sixth"],
+        //   image:
+        //     "https://drive.google.com/thumbnail?id=10p9uDeIToVamHjNxe0sMVs8szZvNM9cm&sz=w1026-h1026",
+        //   notes:
+        //     "https://drive.google.com/file/d/1b70amVYpGOg7-RLVsgqAUJY4XH063Wfk/view?usp=drive_link",
+        //   syllabus:
+        //     "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+        //   pyq: "https://drive.google.com/drive/folders/10L7Txx9gQVP2WMxW-TvwWUFpCCyYq2gR?usp=drive_link",
+        //   resource:
+        //     "https://drive.google.com/drive/folders/1vlURyvp9gszfS0nDl42-om-of_cdPysA?usp=drive_link",
+        // },
+        // {
+        //   id: 19,
+        //   title: "Software Engineering",
+        //   code: "SE101",
+        //   department: ["CSE", "IT"],
+        //   semester: ["Fifth"],
+        //   image:
+        //     "https://drive.google.com/thumbnail?id=1byiVJlIUIEpUHObFSth5WhhoI6ZYpMll&sz=w1026-h1026",
+        //   notes:
+        //     "https://drive.google.com/file/d/1bHM9oKEbVPrXx8PnGRMRJ9R8D4OpJQFP/view?usp=drive_link",
+        //   syllabus:
+        //     "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+        //   pyq: "https://drive.google.com/drive/folders/10L7Txx9gQVP2WMxW-TvwWUFpCCyYq2gR?usp=drive_link",
+        //   resource: "",
+        // },
+        // {
+        //   id: 20,
+        //   title: "Computer Graphics",
+        //   code: "CG101",
+        //   department: ["CSE", "IT"],
+        //   semester: ["Sixth"],
+        //   image:
+        //     "https://drive.google.com/thumbnail?id=1fMLq5AV7Gh_V9ei_qrj5LK6cmQCa_NHk&sz=w1026-h1026",
+        //   notes:
+        //     "https://drive.google.com/file/d/1bAS5PaFgVIQtGwy7pTmRxLHMrzSURvql/view?usp=drive_link",
+        //   syllabus:
+        //     "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+        //   pyq: "https://drive.google.com/drive/folders/10L7Txx9gQVP2WMxW-TvwWUFpCCyYq2gR?usp=drive_link",
+        //   resource:
+        //     "https://drive.google.com/drive/folders/1MAoB6V-VV54C_oBv6aDpoVfY1oXbrb3Q?usp=drive_link",
+        // },
+        // {
+        //   id: 21,
+        //   title: "Data Mining",
+        //   code: "DM101",
+        //   department: ["CSE", "IT"],
+        //   semester: ["Sixth"],
+        //   image:
+        //     "https://drive.google.com/thumbnail?id=10te5bNW4gx0Y6UwlfOM6ig05v8hXdOq2&sz=w1026-h1026",
+        //   notes:
+        //     "https://drive.google.com/file/d/1b66RoiYQ1-MUIbksKEldJsEVvBtPQ_k_/view?usp=drive_link",
+        //   syllabus:
+        //     "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+        //   pyq: "https://drive.google.com/drive/folders/10L7Txx9gQVP2WMxW-TvwWUFpCCyYq2gR?usp=drive_link",
+        //   resource:
+        //     "https://drive.google.com/drive/folders/1qC4YHGfnglHWdxvm8IRvbV73m8K6Ic-T?usp=drive_link",
+        // },
+        // {
+        //   id: 22,
+        //   title: "Enterpreneurship Development",
+        //   code: "ED101",
+        //   department: ["CSE", "IT"],
+        //   semester: ["Fifth"],
+        //   image:
+        //     "https://drive.google.com/thumbnail?id=1qbGbBkXmpxdTJ6BHyKBgnNKmhwT6GQpS&sz=w1026-h1026",
+        //   notes:
+        //     "https://drive.google.com/file/d/1KTdai6ek_z19_G9YJOVChcIbJq6i-JUs/view?usp=drive_link",
+        //   syllabus:
+        //     "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+        //   pyq: "",
+        //   resource:
+        //     "https://drive.google.com/drive/folders/1o9jgBgr_Z7kTBFj9eJeF4LeE_chtr5iX?usp=drive_link",
+        // },
+        {
+          id: 23,
+          title: "Computer Organization and Architecture",
+          code: "CS2102",
+          department: ["CSE", "IT", "AIML"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1EihIGWWZNbXh22fHiVvMWs622WVvwYk4",
+          notes:
+            "https://drive.google.com/file/d/1wyV4QemsOhkoAqYycsQYdyzj5GIgaNvJ/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1z5lGkK6kcD-5RsnxhqQoxFT3CuiHqoHE?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1z5lGkK6kcD-5RsnxhqQoxFT3CuiHqoHE?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1z5lGkK6kcD-5RsnxhqQoxFT3CuiHqoHE?usp=drive_link",
+        },
+        {
+          id: 24,
+          title: "English For Technical Writing",
+          code: "BH1423",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planing",
+            "Textile",
+          ],
+          semester: ["First", "Second"],
+          image:
+            "https://drive.google.com/thumbnail?id=101efxqWQP8As46KclnpGFZ30Mf9yNAnr",
+          notes:
+            "https://drive.google.com/drive/folders/1qz8VAPxZprWJiOQdR1PDtnenudT_K5Bo?usp=sharing",
+          syllabus:
+            "https://drive.google.com/file/d/1mE87Oe5vPBxbRqIKR8t-UKGT7-SNiMbI/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1qz8VAPxZprWJiOQdR1PDtnenudT_K5Bo?usp=drive_link",
+          resource:
+            "https://docs.google.com/document/d/1Uw7ScGWBMZSWBNvmIN1GrB0HJk19BIcVsTCv0X9aH9o/edit?usp=sharing",
+        },
+        {
+          id: 25,
+          title: "Soft Computing",
+          code: "EE2107",
+          department: ["EE", "AIR"],
+          semester: ["Fourth", "Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1195h1VIW_V5LHtL_UvYBeoj4-7UTXLtp",
+          notes:
+            "https://drive.google.com/drive/folders/1RTeLcGXtP1HWV4L5FrpQRYvJ0wieopzl?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1RTeLcGXtP1HWV4L5FrpQRYvJ0wieopzl?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1RTeLcGXtP1HWV4L5FrpQRYvJ0wieopzl?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1RTeLcGXtP1HWV4L5FrpQRYvJ0wieopzl?usp=drive_link",
+        },
+        {
+          id: 26,
+          title: "Data Analysis and Interpretation",
+          code: "CS2507",
+          department: ["CSE", "IT", "AIML", "Civil", "Textile"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1wv2TWtjNBs7Wq6_JrFdt19e8kXD1N8bt",
+          notes:
+            "https://drive.google.com/drive/folders/1gyTnG0FKPX8W3ztNXIv_2smGYt0gsZ_2?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1gyTnG0FKPX8W3ztNXIv_2smGYt0gsZ_2?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1gyTnG0FKPX8W3ztNXIv_2smGYt0gsZ_2?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1gyTnG0FKPX8W3ztNXIv_2smGYt0gsZ_2?usp=sharing",
+        },
+        // {
+        //   id: 27,
+        //   title: "Software Engineering",
+        //   code: "SE209",
+        //   department: ["CSE"],
+        //   semester: ["Sixth"],
+        //   image:
+        //     "",
+        //   notes:
+        //     "",
+        //   syllabus:
+        //     "",
+        //   pyq: "",
+        //   resource: "",
+        // },
+        {
+          id: 28,
+          title: "Organizational Behaviour",
+          code: "BH2437",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Textile",
+          ],
+          semester: ["Fourth", "Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1AsxgeXWpfsjXpE8078XMdgLVDoj2przV",
+          notes:
+            "https://drive.google.com/drive/folders/1QkL4Z8JafIf0-bPM4IlW2kLvPcn2cG7_?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1QkL4Z8JafIf0-bPM4IlW2kLvPcn2cG7_?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1QkL4Z8JafIf0-bPM4IlW2kLvPcn2cG7_?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1QkL4Z8JafIf0-bPM4IlW2kLvPcn2cG7_?usp=sharing",
+        },
+        {
+          id: 29,
+          title: "Basic Civil Engineering",
+          code: "IP1401",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planing",
+            "Textile",
+          ],
+          semester: ["First", "Second"],
+          image:
+            "https://drive.google.com/thumbnail?id=1vZLdiRja5b3y-4JsdcPPMk1BgXj18Uqu",
+          notes:
+            "https://drive.google.com/drive/folders/1jTRDwexjFXF2qOpqXhcy39f8IXuGaDbK?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1x_4-EbpfdIaC4gA-_knAyw7XhYX-P6yh?usp=drive_link",
+          resource:
+            "https://docs.google.com/document/d/1PIgn4bdvnSHu8Wolmc37QPVzZMsCLPF7sny3Yc_Dxcg/edit?usp=sharing",
+        },
+        {
+          id: 30,
+          title: "Basic Electrical Engineering",
+          code: "EE1401",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planing",
+            "Textile",
+          ],
+          semester: ["First", "Second"],
+          image:
+            "https://drive.google.com/thumbnail?id=1pC2X2mdfWCLS5VHSA8qrmOSSLbdR92In",
+          notes:
+            "https://drive.google.com/drive/folders/1L1QnLqNXpLL6T9zNYNnnpJGSIb7vCYER?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1x_4-EbpfdIaC4gA-_knAyw7XhYX-P6yh?usp=drive_link",
+          resource:
+            "https://youtube.com/playlist?list=PL9RcWoqXmzaLTYUdnzKhF4bYug3GjGcEc&si=bfh2KX-_X1VK_5KE",
+        },
+        {
+          id: 31,
+          title: "Basic Electronics",
+          code: "EI1401",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planing",
+            "Textile",
+          ],
+          semester: ["First", "Second"],
+          image:
+            "https://drive.google.com/thumbnail?id=1R7-idVQMQrt4SCrsCu3AO3El2YMhbBAs",
+          notes:
+            "https://drive.google.com/drive/folders/1FS8F6KoozjeU_G7hliF2D96WLLvsyhqE?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1x_4-EbpfdIaC4gA-_knAyw7XhYX-P6yh?usp=drive_link",
+          resource:
+            "https://www.youtube.com/playlist?list=PLBlnK6fEyqRiw-GZRqfnlVIBz9dxrqHJS",
+        },
+        {
+          id: 32,
+          title: "Basic Mechanical Engineering",
+          code: "MS1401",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planing",
+            "Textile",
+          ],
+          semester: ["First", "Second"],
+          image:
+            "https://drive.google.com/thumbnail?id=1yjNnG18Tof7LSqdc2llylQlkU3GKWZGe",
+          notes:
+            "https://drive.google.com/drive/folders/18pBo_fZd6OAIYbQBqLP6AFfoxgKUTQiV?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1x_4-EbpfdIaC4gA-_knAyw7XhYX-P6yh?usp=drive_link",
+          resource:
+            "https://docs.google.com/document/d/1MfiDjQnjieCgjeJF2QKBfvHwbb3Vo6qWfb-fbKGeEWg/edit?usp=sharing",
+        },
+        {
+          id: 33,
+          title: "Engineering Mechanics",
+          code: "MS1403",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planing",
+            "Textile",
+          ],
+          semester: ["First", "Second"],
+          image:
+            "https://drive.google.com/thumbnail?id=1AsaCZQ8sX8rX13RPbu-nUueclaZqWdJq",
+          notes:
+            "https://drive.google.com/drive/folders/1fiIYXH2gUDJ2gRDICCZ-8VwNEDjrw3WC?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1x_4-EbpfdIaC4gA-_knAyw7XhYX-P6yh?usp=drive_link",
+          resource:
+            "https://docs.google.com/document/d/1akkjBMbJvZ6IIBrQUYS_39D2xg3IU7SFh4xtyGzjxaE/edit?usp=sharing",
+        },
+
+        {
+          id: 34,
+          title: "Universal Human Values",
+          code: "BH1421",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planing",
+            "Textile",
+          ],
+          semester: ["First", "Second"],
+          image:
+            "https://drive.google.com/thumbnail?id=1iwRLdDqVoJz59s04FIDElQN1d_dqS-1_",
+          notes:
+            "https://drive.google.com/drive/folders/1QY3To7cXs54swcEVCJAM1EKjvik-xRdX?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1x_4-EbpfdIaC4gA-_knAyw7XhYX-P6yh?usp=drive_link",
+          resource:
+            "https://docs.google.com/document/d/1fES_Vvw797nbQX2gBflOQ1mI2tRj3UE1CVahGR3P7xY/edit?usp=sharing",
+        },
+        {
+          id: 35,
+          title: "Programming in C and Data Structures",
+          code: "CS1401",
+          department: [
+            "CSE",
+            "AIML",
+            "IT",
+            "ME",
+            "AIR",
+            "EE",
+            "ECE",
+            "EnI",
+            "CE",
+            "BT",
+            "COE",
+            "Planing",
+            "Textile",
+          ],
+          semester: ["First", "Second"],
+          image:
+            "https://drive.google.com/thumbnail?id=1pumft1tyYtmIlWYXbvaknAFyMtjSaNHK",
+          notes:
+            "https://drive.google.com/drive/folders/19H2Qik69rBYQTVlm4KowPSHI4FV8aeaz?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1x_4-EbpfdIaC4gA-_knAyw7XhYX-P6yh?usp=drive_link",
+          resource:
+            "https://youtube.com/playlist?list=PLdo5W4Nhv31a8UcMN9-35ghv8qyFWD9_S&si=wFduVocHQvLVndKq",
+        },
+        {
+          id: 37,
+          title: "Operating System",
+          code: "CS2105",
+          department: ["CSE", "IT"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1AMYRU2krCwYWT1Wy4-oygN9ReoYg4-7i",
+          notes:
+            "https://drive.google.com/file/d/10Y_uPc0xYnCFMOHLjMkxe6Bm040xfxeJ/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1lBzzXBFIkvHuiudKp_OcvrKlmkNHRxhm?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1lBzzXBFIkvHuiudKp_OcvrKlmkNHRxhm?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1lBzzXBFIkvHuiudKp_OcvrKlmkNHRxhm?usp=sharing",
+        },
+        {
+          id: 38,
+          title: "Analog and Digital Electronics",
+          code: "ADE209",
+          department: ["EE"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1c_r9zKHsf3SoKQCWffoERYlTP4bar25w",
+          notes:
+            "https://drive.google.com/drive/folders/1q46zbJfZ3kr7brl34QxdPxv38MgdfwgY?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1q46zbJfZ3kr7brl34QxdPxv38MgdfwgY?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1q46zbJfZ3kr7brl34QxdPxv38MgdfwgY?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1q46zbJfZ3kr7brl34QxdPxv38MgdfwgY?usp=sharing",
+        },
+        // {
+        //   id: 39,
+        //   title: "Analog Electronics",
+        //   code: "AEE209",
+        //   department: ["EE"],
+        //   semester: ["Third"],
+        //   image: "https://drive.google.com/thumbnail?id=1yCsL9yBdtaE6w3jkOgd4JpjkAUHH-XLx",
+        //   notes:
+        //     "https://drive.google.com/drive/folders/1Ey5SyutM-n1SoY357kAl81ziE9egjO50?usp=drive_link",
+        //   syllabus:
+        //     "https://drive.google.com/file/d/1qJ9i0D7kixWz4-I9BHrn1q8hN3LbrJ54/view?usp=drive_link",
+        //   pyq: "",
+        //   resource:
+        //     "https://drive.google.com/drive/folders/1q46zbJfZ3kr7brl34QxdPxv38MgdfwgY?usp=drive_link",
+        // },
+        {
+          id: 40,
+          title: "Electrical Circuit Analysis",
+          code: "EE2103",
+          department: ["EE"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1W1yjQ9IDFm46BiOZDMKVjXA2ChxlCcye",
+          notes:
+            "https://drive.google.com/drive/folders/1iJrmnM_Bq18mokBo5QmfGB5VqwBhXGEx?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1iJrmnM_Bq18mokBo5QmfGB5VqwBhXGEx?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1iJrmnM_Bq18mokBo5QmfGB5VqwBhXGEx?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1iJrmnM_Bq18mokBo5QmfGB5VqwBhXGEx?usp=sharing",
+        },
+        {
+          id: 41,
+          title: "Surveying and Geomatics",
+          code: "IP2015",
+          department: ["CE"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1Ik38NNKCWrz9tRpWrnx7Mg9qN9JS-2wj",
+          notes:
+            "https://drive.google.com/file/d/1-2zYmnFawBHIIgE1huVXEgij0I2uwUZ3/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/1-wsrktnLFL1EmWP_w-HgAybSkXc8dhR7/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1tqP57bCa3v61c_f-px7QXTBLPrQsmdtb?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1tqP57bCa3v61c_f-px7QXTBLPrQsmdtb?usp=drive_link",
+        },
+        {
+          id: 43,
+          title: "Electromagnetic Field Theory",
+          code: "EI2104",
+          department: ["ECE"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1gJPz7htzA9JezlnZJ4fKqMRwfrSkcE-m",
+          notes:
+            "https://drive.google.com/drive/folders/1G8OI9Mk3GH9bXOfsTExODZj3dDp9pOWv?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1G8OI9Mk3GH9bXOfsTExODZj3dDp9pOWv?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1G8OI9Mk3GH9bXOfsTExODZj3dDp9pOWv?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1G8OI9Mk3GH9bXOfsTExODZj3dDp9pOWv?usp=sharing",
+        },
+        // {
+        //   id: 44,
+        //   title: "Digital System Design",
+        //   code: "DSD209",
+        //   department: ["EE"],
+        //   semester: ["Fourth"],
+        //   image: "https://drive.google.com/thumbnail?id=1gJPz7htzA9JezlnZJ4fKqMRwfrSkcE-m",
+        //   notes: "",
+        //   syllabus:
+        //     "https://drive.google.com/file/d/1ncqY2DvxLQHjmBAmQ--VcYd81HihJIR8/view?usp=drive_link",
+        //   pyq: "",
+        //   resource: "",
+        // },
+        {
+          id: 45,
+          title: "Signals and System",
+          code: "EE2108",
+          department: ["EE", "ECE", "EnI"],
+          semester: ["Third", "Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1Ml8NzkG90Tz8NrdJTgBghJOL9zbFQ1sp",
+          notes:
+            "https://drive.google.com/file/d/1trYNcX5OS6ldoJ6aZ8zW702hCRGmmF6w/view?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1BPorlnSxNmmhv094p6SXZpzYzUg86tmk?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1BPorlnSxNmmhv094p6SXZpzYzUg86tmk?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1BPorlnSxNmmhv094p6SXZpzYzUg86tmk?usp=sharing",
+        },
+        {
+          id: 47,
+          title: "Electrical Machines 1",
+          code: "EE2104",
+          department: ["EE"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1cnwxJ5pZaNmdO170OHYTuh19TRSbF37o",
+          notes:
+            "https://drive.google.com/file/d/1i96W1ZY7Dj-oaC0ho3j2WQ02P4kG9wrX/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1tqP57bCa3v61c_f-px7QXTBLPrQsmdtb?usp=drive_link",
+          pyq: "https://drive.google.com/file/d/1ZNuKIkeCvNBh92GxsMRk4q-I_kKG8qzu/view?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1tqP57bCa3v61c_f-px7QXTBLPrQsmdtb?usp=drive_link",
+        },
+        {
+          id: 47,
+          title: "Electrical Machines 2",
+          code: "EE2104",
+          department: ["EE"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1vRdxNGevLrCZdBHtnhphEiq-L-VlutUQ",
+          notes:
+            "https://drive.google.com/file/d/1nHSzhMVzHLXUm24YRS1QYtXguOEN0CpK/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1rp0_Yb2YJ-uXmMf4_DyeXI0DD3L4X8qw?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1rp0_Yb2YJ-uXmMf4_DyeXI0DD3L4X8qw?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1rp0_Yb2YJ-uXmMf4_DyeXI0DD3L4X8qw?usp=drive_link",
+        },
+        {
+          id: 48,
+          title: "Applied Thermodynamics",
+          code: "MS2103",
+          department: ["ME"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1i7Vk5RmLuEpdlKIcBzuKKOZWGTXARYAY",
+          notes:
+            "https://drive.google.com/drive/folders/1wib4f1grmpfeDLdHfrgF75TxUDudwMgz?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1wib4f1grmpfeDLdHfrgF75TxUDudwMgz?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1wib4f1grmpfeDLdHfrgF75TxUDudwMgz?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1wib4f1grmpfeDLdHfrgF75TxUDudwMgz?usp=sharing",
+        },
+        {
+          id: 88,
+          title: "Introduction to Material Science",
+          code: "MS2105",
+          department: ["ME"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=17UABYya1Roxtx4XjHcGx9aZ6nfUlunlm",
+          notes:
+            "https://drive.google.com/drive/folders/1rgwDhf7_4BGxYGp-sj0UAWTUmTPMeALJ?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1rgwDhf7_4BGxYGp-sj0UAWTUmTPMeALJ?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1rgwDhf7_4BGxYGp-sj0UAWTUmTPMeALJ?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1rgwDhf7_4BGxYGp-sj0UAWTUmTPMeALJ?usp=sharing",
+        },
+        {
+          id: 49,
+          title: "Kinematics and Dynamics of Machines",
+          code: "MS2101",
+          department: ["ME", "AIR"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=10gLnvU3-6nRgiHRBf1dq6FZiw9H7quIW",
+          notes:
+            "https://drive.google.com/drive/folders/1RsA3p2Swd1dSRb2tna1Wa8W5zCJpVF1X?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1RsA3p2Swd1dSRb2tna1Wa8W5zCJpVF1X?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1RsA3p2Swd1dSRb2tna1Wa8W5zCJpVF1X?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1RsA3p2Swd1dSRb2tna1Wa8W5zCJpVF1X?usp=sharing",
+        },
+        {
+          id: 50,
+          title: "Modern Robotics",
+          code: "MS2107",
+          department: ["ME", "AIR"],
+          semester: ["Third", "Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1Dk9sF_TkC7NWWI3Z2d0BFAlYzOkkMc7T",
+          notes:
+            "https://drive.google.com/drive/folders/1zvfZDHlKnTBqlXni1MKps83a3NBUbLpr?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1zvfZDHlKnTBqlXni1MKps83a3NBUbLpr?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1zvfZDHlKnTBqlXni1MKps83a3NBUbLpr?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1zvfZDHlKnTBqlXni1MKps83a3NBUbLpr?usp=sharing",
+        },
+        {
+          id: 51,
+          title: "Digital Manufacturing and Industry 4.0",
+          code: "MS2125",
+          department: ["ME", "AIR"],
+          semester: ["Third", "Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=12JehpASUmocZO-DzylfSZ7tGvtHYo1gX",
+          notes:
+            "https://drive.google.com/drive/folders/1WNqH1J1GCuosWedBqOKoo_Y_AvDip9kD?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1WNqH1J1GCuosWedBqOKoo_Y_AvDip9kD?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1WNqH1J1GCuosWedBqOKoo_Y_AvDip9kD?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1WNqH1J1GCuosWedBqOKoo_Y_AvDip9kD?usp=sharing",
+        },
+        {
+          id: 52,
+          title: "Fluid Mechanics & Hydraulic Mechanics",
+          code: "MS2104",
+          department: ["ME"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1eXeW0QAZUG78uzJ2Wg_jXh3u9Wyi2Qwj",
+          notes:
+            "https://drive.google.com/drive/folders/1c-yWEWiw5GzCA97YTte6YenuUb9gEoNR?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1c-yWEWiw5GzCA97YTte6YenuUb9gEoNR?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1c-yWEWiw5GzCA97YTte6YenuUb9gEoNR?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1c-yWEWiw5GzCA97YTte6YenuUb9gEoNR?usp=sharing",
+        },
+        {
+          id: 53,
+          title: "Manufacturing Processes",
+          code: "MS2106",
+          department: ["ME"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1cKav3Fwy9lLMCuHSpDtzusGgVJfPlRRo",
+          notes:
+            "https://drive.google.com/drive/folders/1k2gLBs9fDD9vZgm7dyJNV_A_o5-kmVTJ?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1k2gLBs9fDD9vZgm7dyJNV_A_o5-kmVTJ?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1k2gLBs9fDD9vZgm7dyJNV_A_o5-kmVTJ?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1k2gLBs9fDD9vZgm7dyJNV_A_o5-kmVTJ?usp=sharing",
+        },
+        {
+          id: 54,
+          title: "Mechanics of Solid",
+          code: "MS2102",
+          department: ["ME"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1dIpQ4AJQcZEYYFQdj8Qz24X6ZeLc2dPa",
+          notes:
+            "https://drive.google.com/drive/folders/1IAw1PC9Kg9JQ1uozClN7KS79Cirf1rwY?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1IAw1PC9Kg9JQ1uozClN7KS79Cirf1rwY?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1IAw1PC9Kg9JQ1uozClN7KS79Cirf1rwY?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1IAw1PC9Kg9JQ1uozClN7KS79Cirf1rwY?usp=sharing",
+        },
+        {
+          id: 55,
+          title: "Production and Operation Management",
+          code: "MS2108",
+          department: ["ME"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1hZEyGpkJa-PtN4OMp29XBQNVRrkQTPZn",
+          notes:
+            "https://drive.google.com/drive/folders/1ezr4T-issOz9x1Lns04SM7tXtsD6rS2T?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1ezr4T-issOz9x1Lns04SM7tXtsD6rS2T?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1ezr4T-issOz9x1Lns04SM7tXtsD6rS2T?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1ezr4T-issOz9x1Lns04SM7tXtsD6rS2T?usp=sharing",
+        },
+        {
+          id: 56,
+          title: "Introduction to Robotics and AI",
+          code: "MS2121",
+          department: ["AIR"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1WvEc5979X50j_G-4G_Rac9MOhlJrYbTT",
+          notes:
+            "https://drive.google.com/drive/folders/1l-62d8Dk0rpzix-zIVRkzuQZbM7RAeNz?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1l-62d8Dk0rpzix-zIVRkzuQZbM7RAeNz?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1l-62d8Dk0rpzix-zIVRkzuQZbM7RAeNz?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1l-62d8Dk0rpzix-zIVRkzuQZbM7RAeNz?usp=sharing",
+        },
+        {
+          id: 57,
+          title: "Materials & Manufacturing",
+          code: "MS2123",
+          department: ["AIR"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1HhkIVja4geiYGDrpkPW5W7y2fj_zlNyN",
+          notes:
+            "https://drive.google.com/drive/folders/1n4GF72ZQiLb_P_bonqVvTDR0LfEJvzTZ?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1n4GF72ZQiLb_P_bonqVvTDR0LfEJvzTZ?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1n4GF72ZQiLb_P_bonqVvTDR0LfEJvzTZ?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1n4GF72ZQiLb_P_bonqVvTDR0LfEJvzTZ?usp=sharing",
+        },
+        {
+          id: 58,
+          title: "Robotics in Automation",
+          code: "MS2122",
+          department: ["AIR"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1Sc9DHo9XWNlC5Q6lChblhOowZ-KMN7ph",
+          notes:
+            "https://drive.google.com/drive/folders/1xqrIMTHhLqceg_uhFYbtbmDTdycBfUtr?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1xqrIMTHhLqceg_uhFYbtbmDTdycBfUtr?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1xqrIMTHhLqceg_uhFYbtbmDTdycBfUtr?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1xqrIMTHhLqceg_uhFYbtbmDTdycBfUtr?usp=sharing",
+        },
+        {
+          id: 60,
+          title: "Solid Mechanics and Design",
+          code: "MS2126",
+          department: ["AIR"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1dvqgkeLuJXb6zSVwXrA7ksPF_26GnXww",
+          notes:
+            "https://drive.google.com/drive/folders/1O3SiB-tHNQ7_h43TeQOrMs_YOycA4x_s?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1O3SiB-tHNQ7_h43TeQOrMs_YOycA4x_s?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1O3SiB-tHNQ7_h43TeQOrMs_YOycA4x_s?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1O3SiB-tHNQ7_h43TeQOrMs_YOycA4x_s?usp=sharing",
+        },
+        {
+          id: 61,
+          title: "Thermal and Fluid Science",
+          code: "MS2128",
+          department: ["AIR"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1YLTZO2XAS4jxzG1HbPhqORU8S6Axu7Nm",
+          notes:
+            "https://drive.google.com/drive/folders/1cB2BybdsAKVWEVINW3-fJEY7Yr91MgTz?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1cB2BybdsAKVWEVINW3-fJEY7Yr91MgTz?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1cB2BybdsAKVWEVINW3-fJEY7Yr91MgTz?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1cB2BybdsAKVWEVINW3-fJEY7Yr91MgTz?usp=sharing",
+        },
+        {
+          id: 62,
+          title: "Electrical and Electronic Measurement",
+          code: "EI2121",
+          department: ["EnI", "ECE"],
+          semester: ["Third", "Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=16W_ovhRQoZr-YbWgS5DgEIO0nhqGPsix",
+          notes:
+            "https://drive.google.com/file/d/1C0x9h3C2Xadmq91QmfwUyGECrPXcA_G7/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1VA9MnlkkX_nM2N_wOt2WJsYCB0tWdM69?usp=drive_link",
+          pyq: "https://drive.google.com/file/d/1uzU6XuvX0XbjCB4fSqZiZzVfSXsYspXI/view?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1VA9MnlkkX_nM2N_wOt2WJsYCB0tWdM69?usp=drive_link",
+        },
+        {
+          id: 63,
+          title: "Electronic Devices and Circuits",
+          code: "EI2101",
+          department: ["EnI", "ECE"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1IfzbmdUGK33rFj1Gu0KeddWXrHc2iyJE",
+          notes:
+            "https://drive.google.com/file/d/11yMxhIye6ZsJ2X4cVJ_zV-Wd-uvpO8kA/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1gB8uEefOgMDPub7_-BaiFpo_nqmrFbiq?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1gB8uEefOgMDPub7_-BaiFpo_nqmrFbiq?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1gB8uEefOgMDPub7_-BaiFpo_nqmrFbiq?usp=drive_link",
+        },
+        {
+          id: 64,
+          title: "Internet of Things",
+          code: "EI2523",
+          department: ["EnI", "ECE"],
+          semester: ["Third", "Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1WKfdirQ465kh_x8NWhpBwbdVfro-cw3t",
+          notes:
+            "https://drive.google.com/file/d/1nwMP3c81_Up8M54rM0I4GNjKitsXlIAE/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1DFAmsZFIdG0RYuX8CNK3KonYO26GoSNB?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1DFAmsZFIdG0RYuX8CNK3KonYO26GoSNB?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1DFAmsZFIdG0RYuX8CNK3KonYO26GoSNB?usp=drive_link",
+        },
+        {
+          id: 65,
+          title: "Network Analysis",
+          code: "EI2105",
+          department: ["EnI", "ECE"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=18pG4ct5jiPHqmr1Buozd3LG-FNURlcor",
+          notes:
+            "https://drive.google.com/drive/folders/19G_Fgr8dxEUi6P__SZzEn7j3Vubrm5rG?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/19G_Fgr8dxEUi6P__SZzEn7j3Vubrm5rG?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/19G_Fgr8dxEUi6P__SZzEn7j3Vubrm5rG?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/19G_Fgr8dxEUi6P__SZzEn7j3Vubrm5rG?usp=drive_link",
+        },
+        {
+          id: 66,
+          title: "Communication Theory",
+          code: "EI2124",
+          department: ["EnI"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1jvSc5gTbI7L8vrUztFmibYmRQd4JGcWA",
+          notes:
+            "https://drive.google.com/drive/folders/1EPzAwDJTNP2XzgXxEpM_K8-dRnnRFn9u?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1EPzAwDJTNP2XzgXxEpM_K8-dRnnRFn9u?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1EPzAwDJTNP2XzgXxEpM_K8-dRnnRFn9u?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1EPzAwDJTNP2XzgXxEpM_K8-dRnnRFn9u?usp=sharing",
+        },
+        {
+          id: 67,
+          title: "Data Analysis using Python",
+          code: "EI2107",
+          department: ["EnI", "ECE"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1IfzbmdUGK33rFj1Gu0KeddWXrHc2iyJE",
+          notes:
+            "https://drive.google.com/drive/folders/1u6PrpFG7o27huK1Xmrs4JTMO-UAL6kQ3?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1u6PrpFG7o27huK1Xmrs4JTMO-UAL6kQ3?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1u6PrpFG7o27huK1Xmrs4JTMO-UAL6kQ3?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1u6PrpFG7o27huK1Xmrs4JTMO-UAL6kQ3?usp=sharing",
+        },
+        {
+          id: 68,
+          title: "Digital Electronics Circuits",
+          code: "EI2102",
+          department: ["EnI", "ECE"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1DVe56QhvAq90Ria0ZMrnIVYqLvTy1ZUf",
+          notes:
+            "https://drive.google.com/drive/folders/1Uva7SBfD-5kTKjU5WvGJTOxRruDpG49i?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1Uva7SBfD-5kTKjU5WvGJTOxRruDpG49i?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1Uva7SBfD-5kTKjU5WvGJTOxRruDpG49i?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1Uva7SBfD-5kTKjU5WvGJTOxRruDpG49i?usp=sharing",
+        },
+        {
+          id: 69,
+          title: "Instrumentation Devices and System-1",
+          code: "EI2122",
+          department: ["EnI"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1tD6qV7BEfXVYMz9Q3v9liMNyM3hSXBpq",
+          notes:
+            "https://drive.google.com/drive/folders/1o1Rmr1sisqCrGgZvC11SAyhfYmNTpiiX?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1o1Rmr1sisqCrGgZvC11SAyhfYmNTpiiX?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1o1Rmr1sisqCrGgZvC11SAyhfYmNTpiiX?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1o1Rmr1sisqCrGgZvC11SAyhfYmNTpiiX?usp=sharing",
+        },
+        {
+          id: 71,
+          title: "Analog Communication",
+          code: "EI2106",
+          department: ["ECE"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=14mou53D-r1ONxAwZ4CFz8h4kLIQYj410",
+          notes:
+            "https://drive.google.com/drive/folders/1Ml_ydYSFVTzx0weB_GbIe1vsBh5pkFzc?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1Ml_ydYSFVTzx0weB_GbIe1vsBh5pkFzc?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1Ml_ydYSFVTzx0weB_GbIe1vsBh5pkFzc?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1Ml_ydYSFVTzx0weB_GbIe1vsBh5pkFzc?usp=sharing",
+        },
+        {
+          id: 72,
+          title: "Cell and Molecular Biology ",
+          code: "BT2101",
+          department: ["BT"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1KEM_JJx4naKUcPJG6WEXUBneasBLaG4l",
+          notes:
+            "https://drive.google.com/drive/folders/1FS8F6KoozjeU_G7hliF2D96WLLvsyhqE?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1FS8F6KoozjeU_G7hliF2D96WLLvsyhqE?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1FS8F6KoozjeU_G7hliF2D96WLLvsyhqE?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1FS8F6KoozjeU_G7hliF2D96WLLvsyhqE?usp=drive_link",
+        },
+        {
+          id: 73,
+          title: "Biochemistry",
+          code: "BT2103",
+          department: ["BT"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1Q8KyyVz2X8CdRZIsdShROX20q6HyzzwR",
+          notes:
+            "https://drive.google.com/drive/folders/1zAplIdpMlMqFHQzlFix-ZAwzdB2yGdg9?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1zAplIdpMlMqFHQzlFix-ZAwzdB2yGdg9?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1zAplIdpMlMqFHQzlFix-ZAwzdB2yGdg9?usp=drive_link",
+        },
+        {
+          id: 74,
+          title: "Biostatistics",
+          code: "BT2105",
+          department: ["BT"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1V4EETujvb-1c3TFNjX_vVUmrXcfvS-9u",
+          notes:
+            "https://drive.google.com/drive/folders/18pBo_fZd6OAIYbQBqLP6AFfoxgKUTQiV?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/18pBo_fZd6OAIYbQBqLP6AFfoxgKUTQiV?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/18pBo_fZd6OAIYbQBqLP6AFfoxgKUTQiV?usp=drive_link",
+        },
+        {
+          id: 76,
+          title: "Microbiology",
+          code: "BT2102",
+          department: ["BT"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1FiyvuDsrrdgblTUGm3cDKAki3Usywszd",
+          notes:
+            "https://drive.google.com/drive/folders/1QY3To7cXs54swcEVCJAM1EKjvik-xRdX?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1QY3To7cXs54swcEVCJAM1EKjvik-xRdX?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1QY3To7cXs54swcEVCJAM1EKjvik-xRdX?usp=drive_link",
+        },
+        {
+          id: 77,
+          title: "Genetics and Genetic Engineering ",
+          code: "BT2104",
+          department: ["BT"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1W7IWbc8PCCe2GEHX8nyInqOUsfNjJ12B",
+          notes:
+            "https://drive.google.com/drive/folders/19H2Qik69rBYQTVlm4KowPSHI4FV8aeaz?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/19H2Qik69rBYQTVlm4KowPSHI4FV8aeaz?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/19H2Qik69rBYQTVlm4KowPSHI4FV8aeaz?usp=drive_link",
+        },
+        {
+          id: 78,
+          title: "Bioenergetics and Thermodynamics",
+          code: "BT2106",
+          department: ["BT"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1ICTseuxvoa_htE6oJ4C6HF7XjAX09GTQ",
+          notes:
+            "https://drive.google.com/drive/folders/1SnZYvNOc8C-Tqje2EellNvYFgkmoz1bV?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1SnZYvNOc8C-Tqje2EellNvYFgkmoz1bV?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1SnZYvNOc8C-Tqje2EellNvYFgkmoz1bV?usp=drive_link",
+        },
+        {
+          id: 79,
+          title: "Bioanalytical Tools and Techniques",
+          code: "BT2108",
+          department: ["BT"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1PDmyTTLPgbIsiLCMXFCvKgrSgauEtT7R",
+          notes:
+            "https://drive.google.com/drive/folders/1KtG4G070iDMWVOchD8tNPlLus4keo6eA?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1KtG4G070iDMWVOchD8tNPlLus4keo6eA?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1KtG4G070iDMWVOchD8tNPlLus4keo6eA?usp=drive_link",
+        },
+        {
+          id: 80,
+          title: "Introduction to Artificial Intelligence and Machine Learning",
+          code: "CS2114",
+          department: ["BT", "CE"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1-OtvsPrQeC1BGBv3-zJ_6_Wc82e1SubE",
+          notes:
+            "https://drive.google.com/drive/folders/1iDvpspi24o3PkIgtdIbUrG7Ztw0m6bUf?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1iDvpspi24o3PkIgtdIbUrG7Ztw0m6bUf?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1iDvpspi24o3PkIgtdIbUrG7Ztw0m6bUf?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1iDvpspi24o3PkIgtdIbUrG7Ztw0m6bUf?usp=drive_link",
+        },
+        {
+          id: 81,
+          title: "Solid Mechanics",
+          code: "IP2101",
+          department: ["CE"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=12PaKk82V-XnrIqHoH8eg5aW45FCpUJS5",
+          notes:
+            "https://drive.google.com/file/d/1-AOZw465zoEqGb4-zW25auFDXyhfmHyQ/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/1qqZKzcI2Qj8_eW9xVwqH__fQExF6YPEF/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1-1F4BJlOdP9Y18gigw4f6Pfx-3iOxa_Z?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1-1F4BJlOdP9Y18gigw4f6Pfx-3iOxa_Z?usp=drive_link",
+        },
+        {
+          id: 82,
+          title: "Fluid Mechanics",
+          code: "IP2103",
+          department: ["CE"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1-IdSOkr33EUmrJco_jjXJX78PWPrplmJ",
+          notes:
+            "https://drive.google.com/file/d/1-ROEbVDmTXPWEvOps2qeixxf40QGoB5W/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/1gAjqr-3JZdZQUqiZ_TgKvBogcuqeWqxG/view?usp=drive_link",
+          pyq: "https://drive.google.com/file/d/1gAjqr-3JZdZQUqiZ_TgKvBogcuqeWqxG/view?usp=drive_link",
+          resource:
+            "https://drive.google.com/file/d/1gAjqr-3JZdZQUqiZ_TgKvBogcuqeWqxG/view?usp=drive_link",
+        },
+        {
+          id: 83,
+          title: "Surveying and Geomatics",
+          code: "IP2015",
+          department: ["CE"],
+          semester: ["Third"],
+          image:
+            "https://drive.google.com/thumbnail?id=1Ik38NNKCWrz9tRpWrnx7Mg9qN9JS-2wj",
+          notes:
+            "https://drive.google.com/file/d/1-2zYmnFawBHIIgE1huVXEgij0I2uwUZ3/view?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/1-wsrktnLFL1EmWP_w-HgAybSkXc8dhR7/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1VxFvzGpEGuEgEYYG6Wbfg7SL9v59lOcC?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1VxFvzGpEGuEgEYYG6Wbfg7SL9v59lOcC?usp=drive_link",
+        },
+        {
+          id: 84,
+          title: "Stuctural Analysis-I",
+          code: "IP2102",
+          department: ["CE"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=19vJFCRm-OtqpIqXchMA0ROtRFpnMIIg-",
+          notes:
+            "https://drive.google.com/drive/folders/1VcGjPmrzsJDy1O27lfbZLCL7qo3jGgri?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1VcGjPmrzsJDy1O27lfbZLCL7qo3jGgri?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1VcGjPmrzsJDy1O27lfbZLCL7qo3jGgri?usp=drive_link",
+        },
+        {
+          id: 85,
+          title: "Stuctural Design-I",
+          code: "IP2104",
+          department: ["CE"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1OLrvprlkuLN2BQ2G5TiDOvRi6ad5-2cG",
+          notes:
+            "https://drive.google.com/drive/folders/1Kf3m8R4pZ3_3DBEs5J_foCEWcBN3-rIe?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1Kf3m8R4pZ3_3DBEs5J_foCEWcBN3-rIe?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1Kf3m8R4pZ3_3DBEs5J_foCEWcBN3-rIe?usp=drive_link",
+        },
+        {
+          id: 86,
+          title: "Geotechnical Engineering-I",
+          code: "IP2106",
+          department: ["CE"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1Cg5H2Q-WFjra4WBXqalK1Iy-jYrFckAU",
+          notes:
+            "https://drive.google.com/drive/folders/1jTRDwexjFXF2qOpqXhcy39f8IXuGaDbK?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1jTRDwexjFXF2qOpqXhcy39f8IXuGaDbK?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1jTRDwexjFXF2qOpqXhcy39f8IXuGaDbK?usp=drive_link",
+        },
+        {
+          id: 87,
+          title: "Transpotation Engineering",
+          code: "IP2108",
+          department: ["CE"],
+          semester: ["Fourth"],
+          image:
+            "https://drive.google.com/thumbnail?id=1auumr2FJeBdFfOUe1kWD2JwnT9iXoOlg",
+          notes:
+            "https://drive.google.com/drive/folders/1L1QnLqNXpLL6T9zNYNnnpJGSIb7vCYER?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/file/d/10PGcAsaEkFo-zp03BrtxmbqxOU-7xvLb/view?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1L1QnLqNXpLL6T9zNYNnnpJGSIb7vCYER?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1L1QnLqNXpLL6T9zNYNnnpJGSIb7vCYER?usp=drive_link",
+        },
+        {
+          id: 88,
+          title: "Planning Theory-II",
+          code: "IP2121",
+          department: ["Planning"],
+          semester: ["Third"],
+          image: "",
+          notes: "https://drive.google.com/drive/folders/1NZeMwlxtIa0zpJNMxW1WSJ5D03zarYxX?usp=drive_link",
+          syllabus: "https://drive.google.com/drive/folders/1NZeMwlxtIa0zpJNMxW1WSJ5D03zarYxX?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1NZeMwlxtIa0zpJNMxW1WSJ5D03zarYxX?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1NZeMwlxtIa0zpJNMxW1WSJ5D03zarYxX?usp=drive_link",
+        },
+        {
+          id: 89,
+          title: "Cities in History",
+          code: "IP2123",
+          department: ["Planning"],
+          semester: ["Third"],
+          image: "",
+          notes: "https://drive.google.com/drive/folders/1U3BC-wU_kkexu99aqZNNlLE-V8P1xVe0?usp=drive_link",
+          syllabus: "https://drive.google.com/drive/folders/1U3BC-wU_kkexu99aqZNNlLE-V8P1xVe0?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1U3BC-wU_kkexu99aqZNNlLE-V8P1xVe0?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1U3BC-wU_kkexu99aqZNNlLE-V8P1xVe0?usp=drive_link",
+        },
+        {
+          id: 90,
+          title: "Traffic and Transport Planning",
+          code: "IP2125",
+          department: ["Planning"],
+          semester: ["Third"],
+          image: "",
+          notes:
+            "https://drive.google.com/drive/folders/1lqhOZ7zaTdWVqFyYXPezqm2mjuC2QObL?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1lqhOZ7zaTdWVqFyYXPezqm2mjuC2QObL?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1lqhOZ7zaTdWVqFyYXPezqm2mjuC2QObL?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1lqhOZ7zaTdWVqFyYXPezqm2mjuC2QObL?usp=drive_link",
+        },
+        {
+          id: 91,
+          title: "Site and Land Development",
+          code: "IP2127",
+          department: ["Planning"],
+          semester: ["Third"],
+          image: "",
+          notes:
+            "https://drive.google.com/drive/folders/1Sw571HZxOyRAAmvHutwBNOwkcLRTY-rC?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1Sw571HZxOyRAAmvHutwBNOwkcLRTY-rC?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1Sw571HZxOyRAAmvHutwBNOwkcLRTY-rC?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1Sw571HZxOyRAAmvHutwBNOwkcLRTY-rC?usp=drive_link",
+        },
+        {
+          id: 92,
+          title: "Demography",
+          code: "IP2129",
+          department: ["Planning"],
+          semester: ["Third"],
+          image: "",
+          notes:
+            "https://drive.google.com/drive/folders/1KYFUW_3aQyfqAM9aBS7VPW4caqmE5Nhk?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1KYFUW_3aQyfqAM9aBS7VPW4caqmE5Nhk?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1KYFUW_3aQyfqAM9aBS7VPW4caqmE5Nhk?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1KYFUW_3aQyfqAM9aBS7VPW4caqmE5Nhk?usp=drive_link",
+        },
+        {
+          id: 93,
+          title: "Planning practice",
+          code: "IP2122",
+          department: ["Planning"],
+          semester: ["Fourth"],
+          image: "",
+          notes:
+            "https://drive.google.com/drive/folders/149shY6iiGm7rSw6u--4MZQi5cZBbnBFu?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/149shY6iiGm7rSw6u--4MZQi5cZBbnBFu?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/149shY6iiGm7rSw6u--4MZQi5cZBbnBFu?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/149shY6iiGm7rSw6u--4MZQi5cZBbnBFu?usp=drive_link",
+        },
+        {
+          id: 94,
+          title: "Ecology and Resources Planning",
+          code: "IP2124",
+          department: ["Planning"],
+          semester: ["Fourth"],
+          image: "",
+          notes:
+            "https://drive.google.com/drive/folders/1kj-sLOb0gf7xQ_JqoQiVt1HUPIvN1rsc?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1kj-sLOb0gf7xQ_JqoQiVt1HUPIvN1rsc?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1kj-sLOb0gf7xQ_JqoQiVt1HUPIvN1rsc?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1kj-sLOb0gf7xQ_JqoQiVt1HUPIvN1rsc?usp=drive_link",
+        },
+        {
+          id: 95,
+          title: "Housing",
+          code: "IP2126",
+          department: ["Planning"],
+          semester: ["Fourth"],
+          image: "",
+          notes:
+            "https://drive.google.com/drive/folders/1wL_hAH8lFG0uU7EQFBx8nlqgwInpqz66?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1wL_hAH8lFG0uU7EQFBx8nlqgwInpqz66?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1wL_hAH8lFG0uU7EQFBx8nlqgwInpqz66?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1wL_hAH8lFG0uU7EQFBx8nlqgwInpqz66?usp=drive_link",
+        },
+        {
+          id: 96,
+          title: "Reading and Comprehending Spaces",
+          code: "IP2128",
+          department: ["Planning"],
+          semester: ["Fourth"],
+          image: "",
+          notes:
+            "https://drive.google.com/drive/folders/1JYNtw9BBywAJnfV8V9-MnubWB5uKZ0f2?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1JYNtw9BBywAJnfV8V9-MnubWB5uKZ0f2?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1JYNtw9BBywAJnfV8V9-MnubWB5uKZ0f2?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1JYNtw9BBywAJnfV8V9-MnubWB5uKZ0f2?usp=drive_link",
+        },
+        {
+          id: 97,
+          title: "Public Policy and Politics in Planning",
+          code: "IP2222",
+          department: ["Planning"],
+          semester: ["Fourth"],
+          image: "",
+          notes:
+            "https://drive.google.com/drive/folders/1PsvlSk5XPJYu5IYYlv5GzFz5fpOsAqcn?usp=drive_link",
+          syllabus:
+            "https://drive.google.com/drive/folders/1PsvlSk5XPJYu5IYYlv5GzFz5fpOsAqcn?usp=drive_link",
+          pyq: "https://drive.google.com/drive/folders/1PsvlSk5XPJYu5IYYlv5GzFz5fpOsAqcn?usp=drive_link",
+          resource:
+            "https://drive.google.com/drive/folders/1PsvlSk5XPJYu5IYYlv5GzFz5fpOsAqcn?usp=drive_link",
+        },
+        {
+          id: 98,
+          title: "Advanced Spatial Data Infrastructure for Planning",
+          code: "IP2224",
+          department: ["Planning"],
+          semester: ["Fourth"],
+          image: "",
+          notes:
+            "https://drive.google.com/drive/folders/1RKfBg9O3fM-2tY0YVXpkx1qOVBqHX0da?usp=sharing",
+          syllabus:
+            "https://drive.google.com/drive/folders/1RKfBg9O3fM-2tY0YVXpkx1qOVBqHX0da?usp=sharing",
+          pyq: "https://drive.google.com/drive/folders/1RKfBg9O3fM-2tY0YVXpkx1qOVBqHX0da?usp=sharing",
+          resource:
+            "https://drive.google.com/drive/folders/1RKfBg9O3fM-2tY0YVXpkx1qOVBqHX0da?usp=sharing",
+        },
+      ];
+
+      function filterSubjects(department, semester, subject) {
+        return subjects.filter(
+          (s) =>
+            (!department || s.department.includes(department)) &&
+            (!semester || s.semester.includes(semester)) &&
+            (!subject ||
+              s.title.toLowerCase().includes(subject.toLowerCase()) ||
+              s.code.toLowerCase().includes(subject.toLowerCase()))
+        );
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const departmentInput = document.getElementById("department-input");
+        const semesterInput = document.getElementById("semester-input");
+        const subjectInput = document.getElementById("subject-input");
+        const subjectCards = document.getElementById("subject-cards");
+
+        function addShimmerPlaceholders() {
+          const shimmerCard = `
+            <div class="flex flex-col justify-between border bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden h-[380px] max-w-[350px] w-full transition-colors duration-200">
+              <div class="p-4 flex flex-col h-full">
+                <!-- Image placeholder -->
+                <div class="w-full h-48 flex justify-center items-center">
+                  <div class="w-48 h-48 shimmer rounded-lg"></div>
+                </div>
+                <!-- Text content placeholder -->
+                <div class="flex-1 flex flex-col mt-2">
+                  <div class="h-5 w-16 mx-auto shimmer rounded"></div>
+                  <div class="h-12 w-48 mx-auto shimmer rounded mt-1"></div>
+                </div>
+                <!-- Button placeholder - reduced top margin -->
+                <div class="mt-2">
+                  <div class="h-[38px] w-full shimmer rounded-md"></div>
+                </div>
+              </div>
+            </div>
+          `;
+
+          subjectCards.innerHTML = `
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              ${Array(6).fill(shimmerCard).join("")}
+            </div>
+          `;
+        }
+
+        function renderCards() {
+          // Add shimmer effect while filtering
+          addShimmerPlaceholders();
+
+          setTimeout(() => {
+            const filtered = filterSubjects(
+              departmentInput.value,
+              semesterInput.value,
+              subjectInput.value
+            );
+
+            subjectCards.innerHTML = filtered
+              .map(
+                (s) => `
+              <div class="flex flex-col justify-between border bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden h-[380px] max-w-[350px] w-full mx-auto transition-colors duration-200" data-aos="fade-up" data-aos-once="true">
+                <div class="p-4 flex flex-col h-full">
+                  <!-- Image container -->
+                  <div class="w-full h-48 flex justify-center items-center">
+                    <img src="${s.image}" alt="${s.title}" class="w-48 h-48 object-contain" />
+                  </div>
+                  <!-- Text content -->
+                  <div class="flex-1 flex flex-col mt-2">
+                    <!-- Code -->
+                    <p class="text-sm text-gray-600 dark:text-gray-400 text-center">${s.code}</p>
+                    <!-- Title -->
+                    <h2 class="text-lg uppercase font-semibold text-center mt-1 dark:text-white line-clamp-2">${s.title}</h2>
+                  </div>
+                  <!-- Button container - reduced top margin -->
+                  <div class="mt-2">
+                    <button class="w-full h-[38px] bg-purple-600 dark:bg-purple-700 text-white rounded-md hover:bg-purple-700 dark:hover:bg-purple-800 transition-colors duration-200 explore-btn" data-subject-id="${s.id}">
+                      Explore
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `
+              )
+              .join("");
+
+            // Attach events to the "Explore" buttons
+            const exploreButtons = document.querySelectorAll(".explore-btn");
+            exploreButtons.forEach((button) => {
+              button.addEventListener("click", (e) => {
+                const subjectId = e.target.getAttribute("data-subject-id");
+                const subject = subjects.find((s) => s.id == subjectId);
+                renderSubjectPage(subject);
+              });
+            });
+          }, 300);
+        }
+
+        departmentInput.addEventListener("change", renderCards);
+        semesterInput.addEventListener("change", renderCards);
+        subjectInput.addEventListener("input", renderCards);
+
+        function renderSubjectPage(subject) {
+          document.body.innerHTML = `
+            <class="p-4">
+              <button id="back-button" class="bg-gray-300 dark:bg-gray-700 px-4 py-2 rounded-md hover:bg-gray-400 dark:hover:bg-gray-600 mb-4 text-gray-800 dark:text-white transition-colors duration-200">
+                Back
+              </button>
+              <h1 class="text-4xl font-bold mb-8 text-center dark:text-white">${subject.title}</h1>
+              <div class="flex flex-wrap justify-center gap-6 mb-8 mt-10">
+                <button class="bg-blue-600 dark:bg-blue-700 text-white px-6 py-3 rounded-md hover:bg-blue-700 dark:hover:bg-blue-800 shadow-xl w-full sm:w-auto text-lg transition-colors duration-200">
+                  <a href="${subject.notes}" target="_blank">Handwritten Notes</a>
+                </button>
+                <button class="bg-blue-600 dark:bg-blue-700 text-white px-6 py-3 rounded-md hover:bg-blue-700 dark:hover:bg-blue-800 shadow-xl w-full sm:w-auto text-lg transition-colors duration-200">
+                  <a href="${subject.syllabus}" target="_blank">Syllabus</a>
+                </button>
+                <button class="bg-blue-600 dark:bg-blue-700 text-white px-6 py-3 rounded-md hover:bg-blue-700 dark:hover:bg-blue-800 shadow-xl w-full sm:w-auto text-lg transition-colors duration-200">
+                  <a href="${subject.pyq}" target="_blank">PYQs</a>
+                </button>
+                <button class="bg-blue-600 dark:bg-blue-700 text-white px-6 py-3 rounded-md hover:bg-blue-700 dark:hover:bg-blue-800 shadow-xl w-full sm:w-auto text-lg transition-colors duration-200">
+                  <a href="${subject.resource}" target="_blank">Resources</a>
+                </button>
+              </div>
+              <!-- About Section -->
+              <div class="bg-white dark:bg-gray-800 p-6 shadow-md rounded-lg text-center max-w-4xl mx-auto">
+                <h2 class="text-2xl font-semibold mb-4 dark:text-white">About Team</h2>
+                <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  This set of study materials is a heartfelt gift from your seniors. It was crafted in 2024-25 to empower you in your academic journey. We have kept the content as concise as possible.<br/>
+                  <br/><b>Faculty List</b><br/>
+                  CET was renamed to OUTR officially in 2021, and we are the third batch of OUTR. Our batch commenced on September 9, 2023, and will end on May 31, 2027.
+                  <br/><b>Notes Contributed</b><br/>
+                  Mr. Swayam Subhankar Sahoo (CSE)<br/>
+                  Mr. Adesh Anubhav (EE)<br/>
+                  Mr. Abhinash Pritiraj (IT)<br/>
+                  Mr. Rohnak Agarwal (CSE)<br/>
+                  <b>EduTR Portal Developed By</b><br/>
+                  Abhinash Pritiraj (Project Lead)<br/>
+                  Shubhashree Mohanty (Design Lead)<br/>
+                  Monalisa Patra (Developer)<br/>
+                  Utkal Kumar Dash (Developer)<br/>
+                  <b>EduTR Portal Assisted By</b><br/>
+                  Puneet Dhal (Developer)<br/>
+                  Jagadish Prasad Pattanaik (Developer)
+                </p>
+              </div>
+            </div>
+          `;
+          document
+            .getElementById("back-button")
+            .addEventListener("click", () => {
+              window.location.reload(); // Refresh the page to go back to the main subject page
+            });
+        }
+
+        // Initially render the full list of subjects
+        renderCards();
+      });
+    </script>
+    <!-- AOS Initialize -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        easing: "ease-in-out",
+      });
+    </script>
+
+    <!-- Footer Section -->
+    <footer
+      class="bg-purple-700 dark:bg-gray-800 text-center py-12 flex flex-col gap-4 rounded-t-[25%] mt-6 transition-colors duration-200"
+      data-aos="fade-up"
+    >
+      <div class="flex justify-center items-center gap-2 sm:gap-4 px-4">
+        <!-- Logo container -->
+        <div class="relative flex items-center justify-center">
+          <div
+            class="w-8 h-8 sm:w-12 sm:h-12 bg-[#a77deb] rotate-45 absolute rounded-sm animate-pulse shadow-lg"
+          ></div>
+          <h4
+            id="footer-logo"
+            class="relative ml-2 sm:ml-4 text-2xl sm:text-4xl font-bold tracking-wider text-white"
+          >
+            EduTR
+          </h4>
+        </div>
+        <!-- Divider -->
+        <div
+          class="w-[2px] sm:w-[4px] h-12 sm:h-16 bg-white mx-2 sm:ml-6"
+        ></div>
+        <!-- Image container with responsive sizing -->
+        <img
+          src="https://drive.google.com/thumbnail?id=1Y2QSLXxiLBiUcz9Ks3I8EpekVXVn7ZS3&sz=w200-h70"
+          alt="Zairza"
+          class="h-8 sm:h-12 w-auto object-contain"
+        />
+      </div>
+
+      <!-- Rest of the footer content -->
+      <div class="mt-4 px-4">
+        <h5 class="text-white text-sm sm:text-md font-bold mb-2">
+          Contact Us for any kind of query
+        </h5>
+        <form
+          id="footerContactForm"
+          action="https://api.web3forms.com/submit"
+          method="POST"
+          class="flex justify-center px-4"
+        >
+          <input type="hidden" name="access_key" id="accessKey" />
+          <input
+            type="text"
+            id="footer-message"
+            name="message"
+            class="border border-white bg-transparent px-3 sm:px-4 py-2 rounded text-xs sm:text-sm text-white mr-2 sm:mr-4 placeholder-white font-bold w-full max-w-xs"
+            placeholder="Your message"
+            required
+          />
+          <button
+            type="submit"
+            class="bg-white dark:bg-gray-700 shadow-lg px-3 sm:px-4 py-2 rounded text-purple-900 dark:text-white font-bold text-base sm:text-xl hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200 whitespace-nowrap"
+          >
+            Send
+          </button>
+        </form>
+      </div>
+
+      <div class="text-center px-4 mb-2 text-white font-bold">
+        <p>
+          Come and know more about Zairza and join our community to experience
+          such more amazing stuff.
+        </p>
+      </div>
+      <div class="flex justify-center space-x-9 mb-2">
+        <a
+          href="https://www.facebook.com/zairza.cetb"
+          target="_blank"
+          class="text-white hover:text-gray-300"
+        >
+          <i class="fab fa-facebook-f text-xl"></i>
+        </a>
+        <a
+          href="https://x.com/zairza_cetb"
+          target="_blank"
+          class="text-white hover:text-gray-300"
+        >
+          <i class="fab fa-twitter text-xl"></i>
+        </a>
+        <a
+          href="https://www.youtube.com/@zairzarobosofdescluboutrb1825"
+          target="_blank"
+          class="text-white hover:text-gray-300"
+        >
+          <i class="fab fa-youtube text-xl"></i>
+        </a>
+        <a
+          href="mailto:cet.sac.zairza@gmail.com"
+          target="_blank"
+          class="text-white hover:text-gray-300"
+        >
+          <i class="fas fa-envelope text-xl"></i>
+        </a>
+        <a
+          href="https://www.instagram.com/zairza.outr/"
+          target="_blank"
+          class="text-white hover:text-gray-300"
+        >
+          <i class="fab fa-instagram text-xl"></i>
+        </a>
+        <a
+          href="https://www.linkedin.com/company/zairza/posts/?feedView=all"
+          target="_blank"
+          class="text-white hover:text-gray-300"
+        >
+          <i class="fab fa-linkedin-in text-xl"></i>
+        </a>
+      </div>
+      <div class="text-center mb-2 text-white">
+        <p>
+          OUTR (CET Campus), Kalinga Nagar, Ghatikia, Bhubaneswar, Odisha. +91
+          8984344805
+        </p>
+      </div>
+      <div class="flex justify-center items-center mb-2 font-bold text-white">
+        <span class="mr-2">Presented by</span>
+        <img
+          src="https://drive.google.com/thumbnail?id=1guK8aYFn3U0cqjwjl4JCCRl4uPvQRIYE"
+          alt="Zairza Logo"
+          class="h-12 bg-transparent"
+        />
+      </div>
+
+      <div>
+        <p class="text-white font-bold text-xs sm:text-md mt-2">
+          © 2024 EduTR. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <script>
+      // Check for dark mode preference
+      if (
+        localStorage.getItem("color-theme") === "dark" ||
+        (!("color-theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+    <script>
+      function navigateToHome() {
+        document.body.classList.add("loading");
+        document.body.classList.remove("loading-complete");
+
+        setTimeout(() => {
+          window.location.href = "index.html";
+        }, 300);
+      }
+
+      // Handle back/forward navigation
+      window.addEventListener("pageshow", function (event) {
+        document.body.classList.remove("page-transition");
+      });
+
+      // Update home link to use smooth transition
+      document
+        .querySelector('a[href="index.html"]')
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          navigateToHome();
+        });
+    </script>
+  </body>
+</html>
